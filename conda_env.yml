@@ -1,0 +1,8 @@
+name: lteviz
+channels:
+  - defaults
+  - conda-forge
+  - bioconda
+  - R 
+dependencies:
+  - r-base=4.5.1

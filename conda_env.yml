@@ -1,8 +1,29 @@
 name: lteviz
 channels:
-  - defaults
   - conda-forge
   - bioconda
+  - defaults
   - R 
 dependencies:
-  - r-base=4.5.1
+  - r-base
+  - shiny
+  - r-shinythemes
+  - r-plotly
+  - r-tidyverse
+  - r-dplyr
+  - r-DT
+  - r-biocmanager
+# BiocManager::install("igvShiny")
+  - bioconductor-variantannotation
+  - bioconductor-biomart
+  - samtools
+  - bcftools
+  - bedtools
+  - ucsc-bedgraphtobigwig
+  - r-devtools
+  - openssl
+  - libcurl
+  - libuv
+  - curl
+  - r-curl
+  - r-openssl

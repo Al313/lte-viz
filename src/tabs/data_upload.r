@@ -96,7 +96,7 @@ server <- function(input, output, session) {
     
         parseAndValidateGenomeSpec(
             genomeName = input$genomeName,
-            # initialLocus = "AF324493.2:600-700",
+            initialLocus = "AF324493.2:600-700",
             stockGenome = FALSE,
             dataMode = "localFiles",
             fasta = input$fastaPath,

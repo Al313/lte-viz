@@ -1,11 +1,4 @@
-# load data
-variant_data <- readRDS(paste0("/Users/alimos313/Documents/studies/phd/hpc-research/lte-viz/data/variants_ann_expiii.rds"))
 
-
-exp_line_factor <- c("MT-2_1", "MT-2_2", "MT-4_1", "MT-4_2")
-feature_factor <- unique(variant_data$feature)
-impact_factor <- c("A", "U", "S", "N")
-names(impact_factor) <- c("Any", "Untranslated", "Synonymous", "Non-synonymous")
 
 
 # Define UI

@@ -2,7 +2,7 @@
 
 
 # Define UI
-tab3UI <- function(id) {
+tab4UI <- function(id) {
     ns <- NS(id)
     tabPanel("Frequency Tracker",
         sidebarPanel(

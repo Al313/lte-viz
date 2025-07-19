@@ -1,8 +1,11 @@
 
 # Define server function  
-tab1Server <- function(id) {
+tab2Server <- function(id, dataUploaded, feature_factor, impact_factor, variant_data) {
     moduleServer(id, function(input, output, session) {
 
+        ns <- session$ns
+
+    
         observe({
             # If "All" is selected in features, update to all features (except if already fully selected)
             if ("All" %in% input$feature && !all(feature_factor %in% input$feature)) {
@@ -71,6 +74,22 @@ tab1Server <- function(id) {
             } 
             
             datatable(subset, options = list(pageLength = 10))
+        })
+
+        # Conditionally render entire main panel content
+        output$mainContent <- renderUI({
+            if (!dataUploaded()) {
+                wellPanel(
+                    style = "background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 5px;",
+                    tags$h4("⚠️ Data not uploaded"),
+                    tags$p("Please go to the 'Data Upload' tab and upload the data first.")
+                )
+            } else {
+                tagList(
+                    h1("Variant Table"),
+                    DTOutput(ns("DT_out"))
+                )
+            }
         })
     })
 } # server

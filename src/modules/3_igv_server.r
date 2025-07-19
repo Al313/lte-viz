@@ -3,9 +3,9 @@
 
 # Set paths to input files
 genome_name <- "HIV-NL4_3"
-fasta_file <- file.path("/Users/alimos313/Documents/studies/phd/hpc-research/lte-viz/data/igv-input/plasmid/reference.fasta")
-annotation_file <- file.path("/Users/alimos313/Documents/studies/phd/hpc-research/lte-viz/data/igv-input/plasmid/annotation.gff3")
-vcf_file <- file.path("/Users/alimos313/Documents/studies/phd/hpc-research/lte-viz/data/igv-input/plasmid/filtered_variants.vcf.gz")
+fasta_file <- file.path("data/igv-input/plasmid/reference.fasta")
+annotation_file <- file.path("data/igv-input/plasmid/annotation.gff3")
+vcf_file <- file.path("data/igv-input/plasmid/filtered_variants.vcf.gz")
 line_conversion_tbl <- c("MT-2_1" = 13, "MT-2_2" = 14, "MT-4_1" = 15, "MT-4_2" = 16)
 
 
@@ -26,9 +26,8 @@ options <- parseAndValidateGenomeSpec(
 # Define server function
 
 
-
-# Server module for tab2
-tab2Server <- function(id, options, annotation_file) {
+# Server module for tab3
+tab3Server <- function(id, options, annotation_file) {
     moduleServer(id, function(input, output, session) {
         ns <- session$ns  # Namespace function for this module
         
@@ -64,6 +63,11 @@ tab2Server <- function(id, options, annotation_file) {
         })
         
         observeEvent(input$addVariantTrack, {
+            # limit to 4 variant tracks
+            if (rv$trackCount >= 4) {
+                showNotification("Maximum of 4 variant tracks allowed.", type = "message")
+                return()
+            }
             rv$trackCount <- rv$trackCount + 1
             idx <- rv$trackCount
             track_ns <- paste0("_", idx)
@@ -73,10 +77,14 @@ tab2Server <- function(id, options, annotation_file) {
                 where = "beforeEnd",
                 ui = wellPanel(
                     id = paste0("variantPanel", track_ns),
+                    style = "flex: 0 0 280px; margin: 5px;", # Slightly smaller width for better fit
                     h4(paste("Variant Track", idx)),
-                    selectInput(session$ns(paste0("lineage", track_ns)), "Lineage:", choices = exp_line_factor, selected = "MT-2_1"),
-                    selectInput(session$ns(paste0("passage", track_ns)), "Passage:", choices = as.character(seq(10, 500, 10)), selected = "100"),
-                    sliderInput(session$ns(paste0("af_range", track_ns)), "Allele Frequency Range:", min = 0, max = 1, value = c(0.01, 1), step = 0.01),
+                    selectInput(session$ns(paste0("lineage", track_ns)), "Lineage:", 
+                               choices = exp_line_factor, selected = "MT-2_1"),
+                    selectInput(session$ns(paste0("passage", track_ns)), "Passage:", 
+                               choices = as.character(seq(10, 500, 10)), selected = "100"),
+                    sliderInput(session$ns(paste0("af_range", track_ns)), "Allele Frequency Range:", 
+                               min = 0, max = 1, value = c(0.01, 1), step = 0.01),
                     actionButton(session$ns(paste0("loadVariants", track_ns)), "Load Variants")
                 )
             )

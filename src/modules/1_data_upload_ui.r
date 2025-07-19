@@ -2,7 +2,7 @@
 
 
 # Define UI
-tab0UI <- function(id) {
+tab1UI <- function(id) {
     ns <- NS(id)
     tabPanel("Data Upload",
         sidebarPanel(
@@ -33,8 +33,8 @@ tab0UI <- function(id) {
         ),
 
         mainPanel(
-            igvShinyOutput(ns('igv_browser')),
-            width=10
+                uiOutput(ns('uploadMessage')),  # for success message
+                width = 10
         )
     )
 }

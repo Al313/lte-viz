@@ -45,7 +45,7 @@ custom_plot_theme <- function(application = "publication", scale = 1) {
 
 
 # Define server function  
-tab3Server <- function(id) {
+tab4Server <- function(id) {
     moduleServer(id, function(input, output, session) {
 
 

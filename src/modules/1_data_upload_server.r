@@ -1,7 +1,7 @@
 
 # Server module for tab1
 
-tab1Server <- function(id, dataUploaded) {
+tab1Server <- function(id) {
     moduleServer(id, function(input, output, session) {
     
 
@@ -52,13 +52,13 @@ tab1Server <- function(id, dataUploaded) {
             )
         })
 
-        observeEvent(genomeOptionsPreload(), {
-            dataUploaded(TRUE)
-        })
+        # observeEvent(genomeOptionsPreload(), {
+        #     dataUploaded(TRUE)
+        # })
         
-        observeEvent(genomeOptionsCustom(), {
-            dataUploaded(TRUE)
-        })
+        # observeEvent(genomeOptionsCustom(), {
+        #     dataUploaded(TRUE)
+        # })
         
         # Conditional rendering based on input$dataSourceChoice
         output$uploadMessage <- renderUI({

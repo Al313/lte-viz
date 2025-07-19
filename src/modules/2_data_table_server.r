@@ -1,10 +1,20 @@
 
 # Define server function  
-tab2Server <- function(id, dataUploaded, feature_factor, impact_factor, variant_data) {
+tab2Server <- function(id) {
     moduleServer(id, function(input, output, session) {
 
         ns <- session$ns
 
+        # Load data
+        variant_data <- readRDS("data/variants_ann_expiii.rds") 
+
+        # Set variables
+        line_col_palette <- c("#ff00ff", "#ff2400", "#6600cc", "#0000ff")
+        names(line_col_palette) <- c("MT-2_1", "MT-2_2", "MT-4_1", "MT-4_2")
+        exp_line_factor <- c("MT-2_1", "MT-2_2", "MT-4_1", "MT-4_2")
+        feature_factor <- unique(variant_data$feature)
+        impact_factor <- c("A", "U", "S", "N")
+        names(impact_factor) <- c("Any", "Untranslated", "Synonymous", "Non-synonymous")
     
         observe({
             # If "All" is selected in features, update to all features (except if already fully selected)
@@ -78,18 +88,10 @@ tab2Server <- function(id, dataUploaded, feature_factor, impact_factor, variant_
 
         # Conditionally render entire main panel content
         output$mainContent <- renderUI({
-            if (!dataUploaded()) {
-                wellPanel(
-                    style = "background-color: #fff3cd; border: 1px solid #ffeeba; color: #856404; padding: 15px; border-radius: 5px;",
-                    tags$h4("⚠️ Data not uploaded"),
-                    tags$p("Please go to the 'Data Upload' tab and upload the data first.")
-                )
-            } else {
-                tagList(
-                    h1("Variant Table"),
-                    DTOutput(ns("DT_out"))
-                )
-            }
+            tagList(
+                h1("Variant Table"),
+                DTOutput(ns("DT_out"))
+            )
         })
     })
 } # server

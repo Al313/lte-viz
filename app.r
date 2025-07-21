@@ -12,7 +12,6 @@ library(magrittr)
 library(ggplot2)
 library(plotly)
 library(VariantAnnotation)  # For reading and processing VCF files
-library(rsconnect)
 
 
 
@@ -21,7 +20,15 @@ library(rsconnect)
 
 
 # load modules
-invisible(lapply(list.files(path = "src/modules", pattern = "\\.r$", full.names = TRUE), source))
+# invisible(lapply(list.files(path = "src/modules", pattern = "\\.R$", full.names = TRUE), source))
+
+
+source("src/modules/0_manual_server.R")
+source("src/modules/0_manual_ui.R")
+source("src/modules/1_data_upload_server.R")
+source("src/modules/1_data_upload_ui.R")
+source("src/modules/2_data_table_server.R")
+source("src/modules/2_data_table_ui.R")
 
 
 ui <- fluidPage(
@@ -37,19 +44,17 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
     
-    # # define a variable for data upload
-    # dataUploaded <- reactiveVal(FALSE)
-
-    # # define an output variable to make the input fields conditional
-    # output$dataReady <- reactive({
-    #     dataUploaded()
-    # })
-
-    # outputOptions(output, "dataReady", suspendWhenHidden = FALSE)
+    # Load data
+    variant_data <- readRDS("data/variants_ann_expiii.rds") 
+    # Set variables
+    exp_line_factor <- c("MT-2_1","MT-2_2","MT-4_1","MT-4_2")
+    feature_factor <- c("All","5R","5UTR","5LTRLS","gag","pol","vif","vpr","tat","rev","vpu","env","nef","3UTR","3R")
+    impact_factor <- c("Any","U","S","N")
+    names(impact_factor) <- c("All","Untranslated","Synonymous","Non-synonymous")
 
     tab0Server("tab0")
     tab1Server("tab1")
-    tab2Server("tab2")
+    tab2Server("tab2", variant_data = variant_data, impact_factor = impact_factor)
     # tab3Server("tab3",
     #     options = options,
     #     annotation_file = annotation_file)

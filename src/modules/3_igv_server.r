@@ -80,11 +80,11 @@ tab3Server <- function(id, options, annotation_file) {
                     style = "flex: 0 0 280px; margin: 5px;", # Slightly smaller width for better fit
                     h4(paste("Variant Track", idx)),
                     selectInput(session$ns(paste0("lineage", track_ns)), "Lineage:", 
-                               choices = exp_line_factor, selected = "MT-2_1"),
+                            choices = exp_line_factor, selected = "MT-2_1"),
                     selectInput(session$ns(paste0("passage", track_ns)), "Passage:", 
-                               choices = as.character(seq(10, 500, 10)), selected = "100"),
+                            choices = as.character(seq(10, 500, 10)), selected = "100"),
                     sliderInput(session$ns(paste0("af_range", track_ns)), "Allele Frequency Range:", 
-                               min = 0, max = 1, value = c(0.01, 1), step = 0.01),
+                            min = 0, max = 1, value = c(0.01, 1), step = 0.01),
                     actionButton(session$ns(paste0("loadVariants", track_ns)), "Load Variants")
                 )
             )

@@ -1,46 +1,32 @@
 
 # Define server function  
-tab2Server <- function(id) {
+tab2Server <- function(id, variant_data, impact_factor) {
     moduleServer(id, function(input, output, session) {
 
         ns <- session$ns
 
-        # Load data
-        variant_data <- readRDS("data/variants_ann_expiii.rds") 
-
-        # Set variables
-        line_col_palette <- c("#ff00ff", "#ff2400", "#6600cc", "#0000ff")
-        names(line_col_palette) <- c("MT-2_1", "MT-2_2", "MT-4_1", "MT-4_2")
-        exp_line_factor <- c("MT-2_1", "MT-2_2", "MT-4_1", "MT-4_2")
-        feature_factor <- unique(variant_data$feature)
-        impact_factor <- c("A", "U", "S", "N")
-        names(impact_factor) <- c("Any", "Untranslated", "Synonymous", "Non-synonymous")
-    
         observe({
-            # If "All" is selected in features, update to all features (except if already fully selected)
-            if ("All" %in% input$feature && !all(feature_factor %in% input$feature)) {
-            updateCheckboxGroupInput(session, "feature",
-                selected = c("All", feature_factor))
+            
+            if ("Select All" %in% input$trans_impact){
+                selected_impacts <- c("Untranslated", "Synonymous", "Non-synonymous")
+            } else {
+                selected_impacts <- input$trans_impact
             }
+            
+            updateSelectInput(session, "trans_impact", selected = selected_impacts)
+            
 
-            # If "All" is deselected manually in features, remove it from selected
-            if (!"All" %in% input$feature && all(feature_factor %in% input$feature)) {
-            updateCheckboxGroupInput(session, "feature",
-                selected = "gag")
-            }
-
-            # If "All" is selected in trans_impact, update to all impacts (except if already fully selected)
-            if ("Any" %in% input$trans_impact && !all(names(impact_factor) %in% input$trans_impact)) {
-            updateCheckboxGroupInput(session, "trans_impact",
-                selected = c("Any", names(impact_factor)))
-            }
-
-            # If "Any" is deselected manually in trans_impact, remove it from selected
-            if (!"Any" %in% input$trans_impact && all(names(impact_factor[-1]) %in% input$trans_impact)) {
-            updateCheckboxGroupInput(session, "trans_impact",
-                selected = "Untranslated")
-            }
         })
+
+        observe({
+            updateCheckboxGroupInput(session, "feature", choices = c("5R","5UTR","5LTRLS","gag","pol","vif","vpr","tat","rev","vpu","env","nef","3UTR","3R"),
+                selected = if(input$feature_all_or_none) {
+                    c("5R","5UTR","5LTRLS","gag","pol","vif","vpr","tat","rev","vpu","env","nef","3UTR","3R")
+                } else {
+                    c()
+            })
+        })
+
 
         output$DT_out <- renderDT({
             
@@ -61,37 +47,26 @@ tab2Server <- function(id) {
                 as.numeric(pos_input)
             }
             }, error = function(e) {
-            showNotification("Invalid position format. Use a number or a range like 102-202.", type = "error")
-            numeric(0)
+                showNotification("Invalid position format. Use a number or a range like 102-202.", type = "error")
+                numeric(0)
             })
 
-            # Remove "All" from the selection if present
-            selected_features <- setdiff(input$feature, "All")
-            selected_trans_impact <- setdiff(input$trans_impact, "All")
             
-            subset <- variant_data[
-            variant_data$exp_line %in% input$lineage &
-            variant_data$passage == input$passage &
-            variant_data$allele_freq >= input$af_range[1] &
-            variant_data$allele_freq <= input$af_range[2] &
-            variant_data$effect_simplified %in% impact_factor[selected_trans_impact], ]
+            subset_data <- variant_data[
+                variant_data$exp_line %in% input$lineage &
+                variant_data$passage == input$passage &
+                variant_data$allele_freq >= input$af_range[1] &
+                variant_data$allele_freq <= input$af_range[2] &
+                variant_data$effect_simplified %in% impact_factor[input$trans_impact], ]
 
             # Conditional filtering based on mode
             if (input$filter_mode == "Position") {
-                subset <- subset[subset$genomic_pos %in% pos_range, ]
+                subset_data <- subset_data[subset_data$genomic_pos %in% pos_range, ]
             } else if (input$filter_mode == "Feature") {
-                subset <- subset[subset$feature %in% selected_features, ]
+                subset_data <- subset_data[subset_data$feature %in% input$feature, ]
             } 
             
-            datatable(subset, options = list(pageLength = 10))
-        })
-
-        # Conditionally render entire main panel content
-        output$mainContent <- renderUI({
-            tagList(
-                h1("Variant Table"),
-                DTOutput(ns("DT_out"))
-            )
+            datatable(subset_data, options = list(pageLength = 10))
         })
     })
 } # server

@@ -1,10 +1,10 @@
-name: lte-viz
+name: lteeviz
 title:
 username: lteeviz
 account: lteeviz
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
-appId: 15094308
-bundleId:
-url: https://lteeviz.shinyapps.io/lte-viz/
+appId: 15108282
+bundleId: 10654783
+url: https://lteeviz.shinyapps.io/lteeviz/
 version: 1

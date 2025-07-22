@@ -10,7 +10,7 @@ tab4UI <- function(id) {
             # Lineage input
             checkboxGroupInput(ns("lineage"), 
                 label="Select lineage(s):",
-                choices = exp_line_factor,
+                choices = c("MT-2_1","MT-2_2","MT-4_1","MT-4_2"),
                 selected = "MT-2_1"),
 
             textInput(ns("mutCase"), label="Insert variant id:", 

@@ -69,5 +69,7 @@ tab2Server <- function(id, variant_data, impact_factor) {
             
             datatable(subset_data, options = list(pageLength = 10))
         })
+
+        gc()
     })
 } # server

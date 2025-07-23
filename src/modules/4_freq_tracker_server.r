@@ -1,7 +1,6 @@
 
 
 
-
 # Define server function  
 tab4Server <- function(id, variant_data) {
     moduleServer(id, function(input, output, session) {
@@ -18,22 +17,30 @@ tab4Server <- function(id, variant_data) {
         # Render plot
         output$variant_plot <- renderPlotly({
         df <- filter_data()
+        df$passage <- as.numeric(as.character(df$passage))
 
-        fig <- ggplot(df, aes(x = passage, y = log10(allele_freq), color = exp_line, group = mut_info_line)) +
+        fig <- ggplot(df, aes(x = passage, y = allele_freq, color = exp_line, group = mut_info_line)) +
             geom_line(linewidth = 2) +
             scale_alpha_manual(values = c(0.1, 1)) +
-            scale_y_continuous(breaks = c(0, -1, -2, -3), labels = c("1", "0.1", "0.01", "0.001")) +
+            scale_x_continuous(breaks = seq(10, 500, 10), limits = c(10, 500)) +
+            scale_y_log10(
+                breaks = c(1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01),
+                labels = scales::label_number()
+            ) +
             labs(
-            y = "Frequency \n",
+            y = "Frequency (log10 scale) \n",
             x = "\n Transfer",
             color = "Lineage\n"
             ) +
             scale_color_manual(labels = c("MT-2_1","MT-2_2","MT-4_1","MT-4_2"), values = c("#ff00ff", "#ff2400", "#6600cc", "#0000ff")) +
-            theme_bw()
+            theme_bw() +
+            theme(axis.text.x = element_text(angle = 90))
 
         ggplotly(fig)
 
         })
+
+        gc()
     })
 }
 

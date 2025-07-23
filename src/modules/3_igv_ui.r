@@ -9,7 +9,7 @@ tab3UI <- function(id) {
             # Sidebar panel
             column(2,
                 wellPanel(
-                    helpText(paste0("Load variant tracks over the whatever genome.")),
+                    helpText(paste0("Load variant tracks over the HIV-1 genome.")),
                     br(),
                     actionButton(ns("addGenomicFeatures"), "Add Genomic Features"),
                     hr(),

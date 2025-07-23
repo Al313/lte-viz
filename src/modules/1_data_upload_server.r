@@ -71,7 +71,7 @@ tab1Server <- function(id) {
                     tags$p("Please proceed to other tabs for exploring the data.")
                 )
                 
-            } else if (input$dataSourceChoice == "Own data" && input$loadFiles > 0) {
+            } else if (input$dataSourceChoice == "Third-party data" && input$loadFiles > 0) {
                 req(genomeOptionsCustom())
                 wellPanel(
                     style = "background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px; border-radius: 5px;",

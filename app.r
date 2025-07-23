@@ -19,6 +19,7 @@ invisible(lapply(list.files(path = "src/modules", pattern = "\\.R$", full.names 
 
 
 
+
 ui <- fluidPage(
     theme = shinytheme("readable"),
     navbarPage("LTEEviz",
@@ -79,3 +80,4 @@ shinyApp(ui, server)
 #     account = "lteeviz-dev",
 #     appName = "lteeviz-dev"  # Optional: give dev version a different app name
 # )
+

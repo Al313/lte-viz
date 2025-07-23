@@ -10,7 +10,7 @@ tab1UI <- function(id) {
 
             radioButtons(ns("dataSourceChoice"), 
                 label="Choose the source of data:",
-                choices = c("LTEE HIV-1", "Own data"),
+                choices = c("LTEE HIV-1", "Third-party data"),
                 selected = "LTEE HIV-1"
             ),
             
@@ -20,7 +20,7 @@ tab1UI <- function(id) {
                 actionButton(ns("preLoadData"), "Load LTEE HIV-1 data")
             ),
             
-            conditionalPanel(condition = sprintf("input['%s'] == 'Own data'", ns("dataSourceChoice")),
+            conditionalPanel(condition = sprintf("input['%s'] == 'Third-party data'", ns("dataSourceChoice")),
                 hr(),
                 tags$h3("Data loading:"),
                 textInput(ns("genomeName"), label="Insert genome name:"),

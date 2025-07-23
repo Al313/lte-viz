@@ -30,6 +30,23 @@ tab3Server <- function(id, options, annotation_file) {
     moduleServer(id, function(input, output, session) {
         ns <- session$ns  # Namespace function for this module
         
+        # Create reactive values to cache VCF data
+        vcf_cache <- reactiveValues(
+            vcf_data = NULL,
+            info_data = NULL,
+            loaded = FALSE
+        )
+        
+        # Function to load VCF data only when needed
+        load_vcf_data <- function() {
+            if (!vcf_cache$loaded) {
+                vcf_cache$vcf_data <- VariantAnnotation::readVcf(vcf_file, genome_name)
+                vcf_cache$info_data <- VariantAnnotation::info(vcf_cache$vcf_data)
+                vcf_cache$loaded <- TRUE
+            }
+            return(list(vcf_data = vcf_cache$vcf_data, info_data = vcf_cache$info_data))
+        }
+
         rv <- reactiveValues(trackCount = 0)
         
         output$igv_browser <- renderIgvShiny({
@@ -79,22 +96,26 @@ tab3Server <- function(id, options, annotation_file) {
                     style = "flex: 0 0 280px; margin: 5px;", # Slightly smaller width for better fit
                     h4(paste("Variant Track", idx)),
                     selectInput(session$ns(paste0("lineage", track_ns)), "Lineage:", 
-                               choices = exp_line_factor, selected = "MT-2_1"),
+                            choices = c("MT-2_1","MT-2_2","MT-4_1","MT-4_2"), selected = "MT-2_1"),
                     selectInput(session$ns(paste0("passage", track_ns)), "Passage:", 
-                               choices = as.character(seq(10, 500, 10)), selected = "100"),
+                            choices = as.character(seq(10, 500, 10)), selected = "100"),
                     sliderInput(session$ns(paste0("af_range", track_ns)), "Allele Frequency Range:", 
-                               min = 0, max = 1, value = c(0.01, 1), step = 0.01),
+                            min = 0, max = 1, value = c(0.01, 1), step = 0.01),
                     actionButton(session$ns(paste0("loadVariants", track_ns)), "Load Variants")
                 )
             )
+            
             
             observeEvent(input[[paste0("loadVariants", track_ns)]], {
                 # Defensive check - debug info
                 cat("Load Variants clicked for track", idx, "\n")
                 
-                vcf_data <- readVcf(vcf_file, genome_name)
-                info_data <- info(vcf_data)
-                
+
+                # Load VCF data only when needed (cached after first load)
+                vcf_info <- load_vcf_data()
+                vcf_data <- vcf_info$vcf_data
+                info_data <- vcf_info$info_data
+
                 af <- as.numeric(info_data$AF)
                 line <- as.character(info_data$LINE)
                 passage <- as.integer(info_data$PASSAGE)
@@ -120,6 +141,10 @@ tab3Server <- function(id, options, annotation_file) {
                     trackName = paste0("Variant Track ", idx),
                     vcfData = filtered_vcf
                 )
+
+                # Force garbage collection to free memory
+                gc()
+                
             }, ignoreInit = TRUE)
         })
 
@@ -130,6 +155,6 @@ tab3Server <- function(id, options, annotation_file) {
             removeUI(selector = paste0("#", ns("variantTracksContainer"), " > *"))
         })
     })
-
+}
 
 

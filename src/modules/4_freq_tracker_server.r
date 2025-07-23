@@ -1,6 +1,7 @@
 
 
 
+
 # Define server function  
 tab4Server <- function(id, variant_data) {
     moduleServer(id, function(input, output, session) {

@@ -1,4 +1,5 @@
 
+
 # Define server function  
 tab2Server <- function(id, variant_data, impact_factor) {
     moduleServer(id, function(input, output, session) {

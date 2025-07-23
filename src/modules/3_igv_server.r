@@ -1,6 +1,5 @@
 
 
-
 # Set paths to input files
 genome_name <- "HIV-NL4_3"
 fasta_file <- file.path("data/igv-input/plasmid/reference.fasta")
@@ -80,7 +79,7 @@ tab3Server <- function(id, options, annotation_file) {
                     style = "flex: 0 0 280px; margin: 5px;", # Slightly smaller width for better fit
                     h4(paste("Variant Track", idx)),
                     selectInput(session$ns(paste0("lineage", track_ns)), "Lineage:", 
-                               choices = c("MT-2_1","MT-2_2","MT-4_1","MT-4_2"), selected = "MT-2_1"),
+                               choices = exp_line_factor, selected = "MT-2_1"),
                     selectInput(session$ns(paste0("passage", track_ns)), "Passage:", 
                                choices = as.character(seq(10, 500, 10)), selected = "100"),
                     sliderInput(session$ns(paste0("af_range", track_ns)), "Allele Frequency Range:", 
@@ -93,8 +92,8 @@ tab3Server <- function(id, options, annotation_file) {
                 # Defensive check - debug info
                 cat("Load Variants clicked for track", idx, "\n")
                 
-                vcf_data <- VariantAnnotation::readVcf(vcf_file, genome_name)
-                info_data <- VariantAnnotation::info(vcf_data)
+                vcf_data <- readVcf(vcf_file, genome_name)
+                info_data <- info(vcf_data)
                 
                 af <- as.numeric(info_data$AF)
                 line <- as.character(info_data$LINE)
@@ -131,4 +130,6 @@ tab3Server <- function(id, options, annotation_file) {
             removeUI(selector = paste0("#", ns("variantTracksContainer"), " > *"))
         })
     })
-}
+
+
+

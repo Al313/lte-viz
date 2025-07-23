@@ -44,7 +44,7 @@ server <- function(input, output, session) {
     tab0Server("tab0")
     tab1Server("tab1")
     tab2Server("tab2", variant_data = variant_data, impact_factor = impact_factor)
-    tab3Server("tab3")
+    tab3Server("tab3", options = options, annotation_file = annotation_file)
     tab4Server("tab4", variant_data = variant_data)
 }
 

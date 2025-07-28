@@ -8,6 +8,7 @@ dependencies:
   - r-base
   - shiny
   - r-shinythemes
+  - r-shinyjs
   - r-plotly
   - r-tidyverse
   - r-dplyr

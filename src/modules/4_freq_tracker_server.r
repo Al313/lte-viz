@@ -25,7 +25,8 @@ tab4Server <- function(id, variant_data) {
             scale_x_continuous(breaks = seq(10, 500, 10), limits = c(10, 500)) +
             scale_y_log10(
                 breaks = c(1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01),
-                labels = scales::label_number()
+                labels = scales::label_number(),
+                limits = c(-1, 1)
             ) +
             labs(
             y = "Frequency (log10 scale) \n",

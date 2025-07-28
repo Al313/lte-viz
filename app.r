@@ -3,6 +3,7 @@
 
 # Load R packages
 library(shiny)
+library(shinyjs)
 library(shinythemes)
 library(igvShiny)
 library(DT)

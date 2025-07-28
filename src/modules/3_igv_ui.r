@@ -5,6 +5,7 @@
 tab3UI <- function(id) {
     ns <- NS(id)
     tabPanel("Genome Browser",
+        useShinyjs(), 
         fluidRow(
             # Sidebar panel
             column(2,

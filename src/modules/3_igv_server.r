@@ -107,8 +107,12 @@ tab3Server <- function(id, options, annotation_file) {
             
             
             observeEvent(input[[paste0("loadVariants", track_ns)]], {
-                # Defensive check - debug info
-                cat("Load Variants clicked for track", idx, "\n")
+                
+                # Disable the button immediately
+                shinyjs::disable(paste0("loadVariants", track_ns))
+                
+                # Show loading notification
+                loading_id <- showNotification("Loading variants... Please wait.", type = "message", duration = NULL)
                 
 
                 # Load VCF data only when needed (cached after first load)
@@ -142,6 +146,12 @@ tab3Server <- function(id, options, annotation_file) {
                     vcfData = filtered_vcf
                 )
 
+                # Remove loading message
+                removeNotification(loading_id)
+
+                # re-enable after load
+                shinyjs::enable(paste0("loadVariants", track_ns))
+                
                 # Force garbage collection to free memory
                 gc()
                 

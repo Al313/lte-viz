@@ -26,7 +26,7 @@ tab1UI <- function(id) {
                 textInput(ns("genomeName"), label="Insert genome name:"),
                 textInput(ns("fastaPath"), label="Insert path to reference genome (FASTA):"),
                 textInput(ns("annotationPath"), label="Insert path to annotation file (GFF3):"),
-                textInput(ns("variantPath"), label="Insert path to variant file (VCF):"),
+                textInput(ns("variantPath"), label="Insert path to mutation file (VCF):"),
                 br(),
                 actionButton(ns("loadFiles"), "Load all files")
             )

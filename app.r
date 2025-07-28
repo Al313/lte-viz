@@ -35,7 +35,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
     
     # Load data
-    variant_data <- readRDS("data/variants_ann_expiii.rds") 
+    mutation_data <- readRDS("data/variants_ann_expiii.rds") 
     # Set variables
     exp_line_factor <- c("MT-2_1","MT-2_2","MT-4_1","MT-4_2")
     feature_factor <- c("All","5R","5UTR","5LTRLS","gag","pol","vif","vpr","tat","rev","vpu","env","nef","3UTR","3R")
@@ -46,16 +46,16 @@ server <- function(input, output, session) {
 
     tab0Server("tab0")
     tab1Server("tab1")
-    tab2Server("tab2", variant_data = variant_data, impact_factor = impact_factor)
+    tab2Server("tab2", mutation_data = mutation_data, impact_factor = impact_factor)
     tab3Server("tab3", options = options, annotation_file = annotation_file)
-    tab4Server("tab4", variant_data = variant_data)
+    tab4Server("tab4", mutation_data = mutation_data)
 }
 
 shinyApp(ui, server)
 
 
 
-### app deployment 
+### app deployment
 
 
 # rsconnect::setAccountInfo(

@@ -1,7 +1,7 @@
 
 
 # Define server function  
-tab2Server <- function(id, variant_data, impact_factor) {
+tab2Server <- function(id, mutation_data, impact_factor) {
     moduleServer(id, function(input, output, session) {
 
         ns <- session$ns
@@ -53,12 +53,12 @@ tab2Server <- function(id, variant_data, impact_factor) {
             })
 
             
-            subset_data <- variant_data[
-                variant_data$exp_line %in% input$lineage &
-                variant_data$passage == input$passage &
-                variant_data$allele_freq >= input$af_range[1] &
-                variant_data$allele_freq <= input$af_range[2] &
-                variant_data$effect_simplified %in% impact_factor[input$trans_impact], ]
+            subset_data <- mutation_data[
+                mutation_data$exp_line %in% input$lineage &
+                mutation_data$passage == input$passage &
+                mutation_data$allele_freq >= input$af_range[1] &
+                mutation_data$allele_freq <= input$af_range[2] &
+                mutation_data$effect_simplified %in% impact_factor[input$trans_impact], ]
 
             # Conditional filtering based on mode
             if (input$filter_mode == "Position") {

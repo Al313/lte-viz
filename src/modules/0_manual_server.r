@@ -1,5 +1,5 @@
 
-rmarkdown::render("src/misc/www/manual.rmd", output_file = "manual.html")
+rmarkdown::render("src/misc/www/manual.Rmd", output_file = "manual.html")
 
 
 
@@ -23,8 +23,8 @@ tab0Server <- function(id) {
             session$sendCustomMessage("scrollTo", list(id = "genomeBrowser"))
         })
 
-        observeEvent(input$goto_variant_tracker, {
-            session$sendCustomMessage("scrollTo", list(id = "frequencyTracker"))
+        observeEvent(input$goto_mutation_tracker, {
+            session$sendCustomMessage("scrollTo", list(id = "mutationFrequencyTracker"))
         })
     })
 }

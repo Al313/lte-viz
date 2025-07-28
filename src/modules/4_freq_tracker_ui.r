@@ -13,14 +13,14 @@ tab4UI <- function(id) {
                 choices = c("MT-2_1","MT-2_2","MT-4_1","MT-4_2"),
                 selected = "MT-2_1"),
 
-            textInput(ns("mutCase"), label="Insert variant id:", 
+            textInput(ns("mutCase"), label="Insert mutation id:", 
                 value="566_G_A", 
                 placeholder="format: position_ref_alt (e.g., 566_G_A)"),
             ),
 
             mainPanel(
-                h1("Variant Trajectory"),
-                plotlyOutput(ns("variant_plot"))
+                h1("Mutation Trajectory"),
+                plotlyOutput(ns("mutation_plot"))
         )
     )
 }

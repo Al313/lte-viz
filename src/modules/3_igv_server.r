@@ -78,10 +78,10 @@ tab3Server <- function(id, options, annotation_file) {
                                         deleteTracksOfSameName = TRUE)
         })
         
-        observeEvent(input$addVariantTrack, {
-            # limit to 4 variant tracks
+        observeEvent(input$addMutationTrack, {
+            # limit to 4 mutation tracks
             if (rv$trackCount >= 4) {
-                showNotification("Maximum of 4 variant tracks allowed.", type = "message")
+                showNotification("Maximum of 4 mutation tracks allowed.", type = "message")
                 return()
             }
             rv$trackCount <- rv$trackCount + 1
@@ -89,30 +89,30 @@ tab3Server <- function(id, options, annotation_file) {
             track_ns <- paste0("_", idx)
             
             insertUI(
-                selector = paste0("#", ns("variantTracksContainer")),
+                selector = paste0("#", ns("mutationTracksContainer")),
                 where = "beforeEnd",
                 ui = wellPanel(
-                    id = paste0("variantPanel", track_ns),
+                    id = paste0("mutationPanel", track_ns),
                     style = "flex: 0 0 280px; margin: 5px;", # Slightly smaller width for better fit
-                    h4(paste("Variant Track", idx)),
+                    h4(paste("Mutation Track", idx)),
                     selectInput(session$ns(paste0("lineage", track_ns)), "Lineage:", 
                             choices = c("MT-2_1","MT-2_2","MT-4_1","MT-4_2"), selected = "MT-2_1"),
                     selectInput(session$ns(paste0("passage", track_ns)), "Passage:", 
                             choices = as.character(seq(10, 500, 10)), selected = "100"),
-                    sliderInput(session$ns(paste0("af_range", track_ns)), "Allele Frequency Range:", 
+                    sliderInput(session$ns(paste0("af_range", track_ns)), "Variant Frequency Range:", 
                             min = 0, max = 1, value = c(0.01, 1), step = 0.01),
-                    actionButton(session$ns(paste0("loadVariants", track_ns)), "Load Variants")
+                    actionButton(session$ns(paste0("loadMutations", track_ns)), "Load Mutations")
                 )
             )
             
             
-            observeEvent(input[[paste0("loadVariants", track_ns)]], {
+            observeEvent(input[[paste0("loadMutations", track_ns)]], {
                 
                 # Disable the button immediately
-                shinyjs::disable(paste0("loadVariants", track_ns))
+                shinyjs::disable(paste0("loadMutations", track_ns))
                 
                 # Show loading notification
-                loading_id <- showNotification("Loading variants... Please wait.", type = "message", duration = NULL)
+                loading_id <- showNotification("Loading mutations... Please wait.", type = "message", duration = NULL)
                 
 
                 # Load VCF data only when needed (cached after first load)
@@ -135,14 +135,14 @@ tab3Server <- function(id, options, annotation_file) {
                 filtered_vcf <- vcf_data[selected]
                 
                 if (length(filtered_vcf) == 0) {
-                    showNotification("No variants found for selected filters", type = "warning")
+                    showNotification("No mutations found for selected filters", type = "warning")
                     return()
                 }
                 
                 loadVcfTrack(
                     session = session,
                     id = ns("igv_browser"),
-                    trackName = paste0("Variant Track ", idx),
+                    trackName = paste0("Mutation Track ", idx),
                     vcfData = filtered_vcf
                 )
 
@@ -150,7 +150,7 @@ tab3Server <- function(id, options, annotation_file) {
                 removeNotification(loading_id)
 
                 # re-enable after load
-                shinyjs::enable(paste0("loadVariants", track_ns))
+                shinyjs::enable(paste0("loadMutations", track_ns))
                 
                 # Force garbage collection to free memory
                 gc()
@@ -162,7 +162,7 @@ tab3Server <- function(id, options, annotation_file) {
         observeEvent(input$removeUserTracks, {
             removeUserAddedTracks(session, id = ns("igv_browser"))
             rv$trackCount <- 0
-            removeUI(selector = paste0("#", ns("variantTracksContainer"), " > *"))
+            removeUI(selector = paste0("#", ns("mutationTracksContainer"), " > *"))
         })
     })
 }

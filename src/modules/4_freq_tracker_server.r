@@ -2,10 +2,10 @@
 
 
 # Define server function  
-tab4Server <- function(id, variant_data) {
+tab4Server <- function(id, mutation_data) {
     moduleServer(id, function(input, output, session) {
 
-        df <- variant_data
+        df <- mutation_data
         df$mut_info_line <- paste0(df$mut_info, "_", df$exp_line)
 
         # Reactive filtered data
@@ -15,7 +15,7 @@ tab4Server <- function(id, variant_data) {
         })
 
         # Render plot
-        output$variant_plot <- renderPlotly({
+        output$mutation_plot <- renderPlotly({
         df <- filter_data()
         df$passage <- as.numeric(as.character(df$passage))
 
@@ -29,7 +29,7 @@ tab4Server <- function(id, variant_data) {
                 limits = c(-1, 1)
             ) +
             labs(
-            y = "Frequency (log10 scale) \n",
+            y = "Variant Frequency (log10 scale) \n",
             x = "\n Transfer",
             color = "Lineage\n"
             ) +

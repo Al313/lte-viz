@@ -5,14 +5,14 @@ tab2UI <- function(id) {
   ns <- NS(id)
 
   # Load data
-  variant_data <- readRDS("data/variants_ann_expiii.rds") 
+  mutation_data <- readRDS("data/variants_ann_expiii.rds") 
   # Set variables
   exp_line_factor <- c("MT-2_1","MT-2_2","MT-4_1","MT-4_2")
   feature_factor <- c("All","5R","5UTR","5LTRLS","gag","pol","vif","vpr","tat","rev","vpu","env","nef","3UTR","3R")
   impact_factor <- c("Any","U","S","N")
   names(impact_factor) <- c("All","Untranslated","Synonymous","Non-synonymous")
 
-  tabPanel("Variant Table",
+  tabPanel("Mutation Table",
     sidebarPanel(
       tags$h3("Input:"),
       
@@ -27,7 +27,7 @@ tab2UI <- function(id) {
         selected = "100"),
 
       sliderInput(ns("af_range"), 
-        label = "Allele Frequency Range:",
+        label = "Variant Frequency Range:",
         min = 0, max = 1,
         value = c(0.01, 1),
         step = 0.01),

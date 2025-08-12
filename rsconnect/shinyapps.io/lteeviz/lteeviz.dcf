@@ -5,6 +5,6 @@ account: lteeviz
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 15108282
-bundleId: 10685655
+bundleId: 10762475
 url: https://lteeviz.shinyapps.io/lteeviz/
 version: 1

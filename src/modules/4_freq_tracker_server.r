@@ -10,17 +10,23 @@ tab4Server <- function(id, mutation_data) {
 
         # Reactive filtered data
         filter_data <- reactive({
-            req(input$mutCase, input$lineage)  # Ensure inputs are available
-            df[df$mut_info %in% input$mutCase & df$exp_line %in% input$lineage, ]
+            req(input$mutCase1, input$lineage)  # Ensure inputs are available
+            df[df$mut_info %in% c(input$mutCase1, input$mutCase2) & df$exp_line %in% input$lineage, ]
         })
 
         # Render plot
         output$mutation_plot <- renderPlotly({
         df <- filter_data()
+
+        # Check if data frame is empty
+        validate(
+            need(nrow(df) > 0, "No records found for the selected filters.")
+        )
+
         df$passage <- as.numeric(as.character(df$passage))
 
-        fig <- ggplot(df, aes(x = passage, y = allele_freq, color = exp_line, group = mut_info_line)) +
-            geom_line(linewidth = 2) +
+        fig <- ggplot(df, aes(x = passage, y = allele_freq, color = exp_line, group = mut_info_line, linetype = mut_info)) +
+            geom_line(linewidth = 1.5) +
             scale_alpha_manual(values = c(0.1, 1)) +
             scale_x_continuous(breaks = seq(10, 500, 10), limits = c(10, 500)) +
             scale_y_log10(

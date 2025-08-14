@@ -26,7 +26,7 @@ options <- parseAndValidateGenomeSpec(
 
 
 # Server module for tab3
-tab3Server <- function(id, options, annotation_file) {
+tab3Server <- function(id, options, annotation_file, module_data) {
     moduleServer(id, function(input, output, session) {
         ns <- session$ns  # Namespace function for this module
 
@@ -135,7 +135,11 @@ tab3Server <- function(id, options, annotation_file) {
                 )
                 
                 filtered_vcf <- vcf_data[selected]
-                
+                                rm(vcf_data)
+                rm(info_data)
+                rm(vcf_info)
+                gc()
+
                 if (length(filtered_vcf) == 0) {
                     showNotification("No mutations found for selected filters", type = "warning")
                     return()

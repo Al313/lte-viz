@@ -29,7 +29,11 @@ tab4UI <- function(id) {
             textInput(ns("mutCase2"), label="Insert second mutation id (optional):", 
                 value="", 
                 placeholder="format: position_ref_alt (e.g., 972_G_A)")
-            )
+            ),
+            
+            br(),
+
+            actionButton(ns("load_plot"), "Load Plot")
 
             
         ),

@@ -10,9 +10,10 @@ tab4Server <- function(id, mutation_data) {
         
 
         # Reactive filtered data
-        filter_data <- reactive({
-            req(input$mutCase1, input$lineage)  # Ensure inputs are available
-            df[df$mut_info %in% c(input$mutCase1, input$mutCase2) & df$exp_line %in% input$lineage, ]
+        filter_data <- eventReactive(input$load_plot, {
+            req(input$mutCase1, input$lineage)
+            df[df$mut_info %in% c(input$mutCase1, input$mutCase2) &
+                df$exp_line %in% input$lineage, ]
         })
 
         # Frequency trajectory plot (plotly)
@@ -26,6 +27,8 @@ tab4Server <- function(id, mutation_data) {
             )
 
             df$passage <- as.numeric(as.character(df$passage))
+            df$exp_line <- factor(df$exp_line, levels = c("MT-2_1","MT-2_2","MT-4_1","MT-4_2"))
+
 
             fig <- ggplot(df, aes(x = passage, y = allele_freq, color = exp_line, linetype = mut_info, group = mut_info_line)) +
                 geom_line(linewidth = 1.5) +
@@ -34,7 +37,7 @@ tab4Server <- function(id, mutation_data) {
                 scale_y_log10(
                     breaks = c(1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01),
                     labels = scales::label_number(),
-                    limits = c(-1, 1)
+                    limits = c(0.01, 1)
                 ) +
                 labs(
                 y = "Variant Frequency (log10 scale) \n",
@@ -42,12 +45,20 @@ tab4Server <- function(id, mutation_data) {
                 color = "Lineage / Mutation\n",
                 linetype = ""
                 ) +
-                scale_color_manual(labels = c("MT-2_1","MT-2_2","MT-4_1","MT-4_2"), values = c("#ff00ff", "#ff2400", "#6600cc", "#0000ff")) +
+                scale_color_manual(
+                    values = c(
+                        "MT-2_1" = "#ff00ff",
+                        "MT-2_2" = "#ff2400",
+                        "MT-4_1" = "#6600cc",
+                        "MT-4_2" = "#0000ff"
+                    )
+                )+
                 guides(color = guide_legend(order = 1), linetype = guide_legend(order = 1)) +  # same order merges them visually
                 theme_bw() +
                 theme(axis.text.x = element_text(angle = 90))
 
-            ggplotly(fig)
+            ggplotly(fig) %>%
+                layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = 1.2))
 
         })
 

@@ -29,6 +29,7 @@ options <- parseAndValidateGenomeSpec(
 tab3Server <- function(id, options, annotation_file) {
     moduleServer(id, function(input, output, session) {
         ns <- session$ns  # Namespace function for this module
+
         
         # Create reactive values to cache VCF data
         vcf_cache <- reactiveValues(
@@ -58,7 +59,7 @@ tab3Server <- function(id, options, annotation_file) {
             showGenomicRegion(session, id = ns("igv_browser"), "AF324493.2:600-700")
             tbl.gff3 <- read.table(annotation_file, sep = "\t", as.is = TRUE, header = FALSE)
             colnames(tbl.gff3) <- c("seqname", "source", "feature", "start", "end",
-                                    "score", "strand", "frame", "attribute")
+                "score", "strand", "frame", "attribute")
             
             color.table <- list(
                 repeat_region = "blue",
@@ -67,15 +68,16 @@ tab3Server <- function(id, options, annotation_file) {
             )
             
             loadGFF3TrackFromLocalData(session,
-                                        id = ns("igv_browser"),
-                                        trackName = "Genomic Features",
-                                        tbl.gff3 = tbl.gff3,
-                                        colorTable = color.table,
-                                        colorByAttribute = "gbkey",
-                                        displayMode = "EXPANDED",
-                                        trackHeight = 200,
-                                        visibilityWindow = 15000,
-                                        deleteTracksOfSameName = TRUE)
+                id = ns("igv_browser"),
+                trackName = "Genomic Features",
+                tbl.gff3 = tbl.gff3,
+                colorTable = color.table,
+                colorByAttribute = "gbkey",
+                displayMode = "EXPANDED",
+                trackHeight = 200,
+                visibilityWindow = 15000,
+                deleteTracksOfSameName = TRUE
+            )
         })
         
         observeEvent(input$addMutationTrack, {
@@ -152,10 +154,10 @@ tab3Server <- function(id, options, annotation_file) {
                 # re-enable after load
                 shinyjs::enable(paste0("loadMutations", track_ns))
                 
-                # Force garbage collection to free memory
-                gc()
+
                 
             }, ignoreInit = TRUE)
+                    
         })
 
         # Remove all user-added tracks and UI
@@ -164,6 +166,8 @@ tab3Server <- function(id, options, annotation_file) {
             rv$trackCount <- 0
             removeUI(selector = paste0("#", ns("mutationTracksContainer"), " > *"))
         })
+
+
     })
 }
 

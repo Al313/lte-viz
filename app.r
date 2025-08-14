@@ -3,11 +3,12 @@
 
 # Load R packages
 library(shiny)
-library(shinyjs)
 library(shinythemes)
+library(shinyjs)
 library(igvShiny)
 library(DT)
 library(plotly)
+
 
 
 
@@ -23,7 +24,7 @@ invisible(lapply(list.files(path = "src/modules", pattern = "\\.R$", full.names 
 
 ui <- fluidPage(
     theme = shinytheme("readable"),
-    navbarPage("LTEEviz",
+    navbarPage("LTEEviz",  id = "mainTabs",
         tab0UI("tab0"),
         tab1UI("tab1"),
         tab2UI("tab2"),
@@ -34,6 +35,12 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
     
+    # Run garbage collection whenever the user changes tabs
+    observeEvent(input$mainTabs, {
+        message("Tab switched to: ", input$mainTabs)
+        gc()
+    })
+
     # Load data
     mutation_data <- readRDS("data/variants_ann_expiii.rds") 
     # Set variables
@@ -52,8 +59,6 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
-
-
 
 ### app deployment
 

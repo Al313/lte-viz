@@ -4,8 +4,6 @@
 tab2Server <- function(id, mutation_data, impact_factor) {
     moduleServer(id, function(input, output, session) {
 
-        ns <- session$ns
-
         observe({
             
             if ("Select All" %in% input$trans_impact){
@@ -57,19 +55,18 @@ tab2Server <- function(id, mutation_data, impact_factor) {
                 mutation_data$exp_line %in% input$lineage &
                 mutation_data$passage == input$passage &
                 mutation_data$allele_freq >= input$af_range[1] &
-                mutation_data$allele_freq <= input$af_range[2] &
-                mutation_data$effect_simplified %in% impact_factor[input$trans_impact], ]
+                mutation_data$allele_freq <= input$af_range[2], ]
 
             # Conditional filtering based on mode
             if (input$filter_mode == "Position") {
                 subset_data <- subset_data[subset_data$genomic_pos %in% pos_range, ]
             } else if (input$filter_mode == "Feature") {
-                subset_data <- subset_data[subset_data$feature %in% input$feature, ]
+                subset_data <- subset_data[subset_data$feature %in% input$feature &
+                subset_data$effect_simplified %in% impact_factor[input$trans_impact], ]
             } 
             
             datatable(subset_data, options = list(pageLength = 10))
         })
 
-        gc()
     })
 } # server

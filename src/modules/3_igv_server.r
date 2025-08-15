@@ -168,7 +168,7 @@ tab3Server <- function(id, options, annotation_file, module_data) {
         observeEvent(input$removeUserTracks, {
             removeUserAddedTracks(session, id = ns("igv_browser"))
             rv$trackCount <- 0
-            removeUI(selector = paste0("#", ns("mutationTracksContainer"), " > *"))
+            removeUI(selector = paste0("#", ns("mutationTracksContainer"), " > *"), multiple = TRUE)
         })
 
 

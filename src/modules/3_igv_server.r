@@ -29,7 +29,6 @@ options <- parseAndValidateGenomeSpec(
 tab3Server <- function(id, options, annotation_file, module_data) {
     moduleServer(id, function(input, output, session) {
         ns <- session$ns  # Namespace function for this module
-
         
         # Create reactive values to cache VCF data
         vcf_cache <- reactiveValues(
@@ -121,21 +120,18 @@ tab3Server <- function(id, options, annotation_file, module_data) {
                 vcf_info <- load_vcf_data()
                 vcf_data <- vcf_info$vcf_data
                 info_data <- vcf_info$info_data
-
-                af <- as.numeric(info_data$AF)
-                line <- as.character(info_data$LINE)
-                passage <- as.integer(info_data$PASSAGE)
                 
                 # Use input directly, NOT namespaced again here
                 selected <- which(
-                    line == line_conversion_tbl[[input[[paste0("lineage", track_ns)]]]] &
-                    passage == as.integer(input[[paste0("passage", track_ns)]]) &
-                    af >= input[[paste0("af_range", track_ns)]][1] &
-                    af <= input[[paste0("af_range", track_ns)]][2]
+                    as.character(info_data$LINE) == line_conversion_tbl[[input[[paste0("lineage", track_ns)]]]] &
+                    as.integer(info_data$PASSAGE) == as.integer(input[[paste0("passage", track_ns)]]) &
+                    as.numeric(info_data$AF) >= input[[paste0("af_range", track_ns)]][1] &
+                    as.numeric(info_data$AF) <= input[[paste0("af_range", track_ns)]][2]
                 )
                 
                 filtered_vcf <- vcf_data[selected]
-                                rm(vcf_data)
+                
+                rm(vcf_data)
                 rm(info_data)
                 rm(vcf_info)
                 gc()
@@ -158,10 +154,7 @@ tab3Server <- function(id, options, annotation_file, module_data) {
                 # re-enable after load
                 shinyjs::enable(paste0("loadMutations", track_ns))
                 
-
-                
-            }, ignoreInit = TRUE)
-                    
+            }, ignoreInit = TRUE)         
         })
 
         # Remove all user-added tracks and UI
@@ -170,8 +163,6 @@ tab3Server <- function(id, options, annotation_file, module_data) {
             rv$trackCount <- 0
             removeUI(selector = paste0("#", ns("mutationTracksContainer"), " > *"), multiple = TRUE)
         })
-
-
     })
 }
 

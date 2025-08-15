@@ -32,7 +32,6 @@ ui <- fluidPage(
         tab4UI("tab4")
     )
 )
-
 server <- function(input, output, session) {
     
     # Store references to module data for cleanup

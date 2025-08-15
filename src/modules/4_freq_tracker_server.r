@@ -60,6 +60,7 @@ tab4Server <- function(id, mutation_data) {
             ggplotly(fig) %>%
                 layout(legend = list(orientation = "h", x = 0.5, xanchor = "center", y = 1.2))
 
+            
         })
 
         # Frequency distribution animation (GIF)
@@ -72,6 +73,8 @@ tab4Server <- function(id, mutation_data) {
                 width = "75%"                       # can also use a numeric pixel value
             )
         }, deleteFile = FALSE)
+
+        gc()
 
     })
 }

@@ -4,114 +4,51 @@
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p><br></p>
-<p>Welcome to the LTEviz application. This manual provides a complete
+<p>Welcome to the LTEEviz application. This manual provides a complete
 guide to using the features of this tool for exploring temporal mutation
 data obtained through next generation sequencing technologies.</p>
-<p>Our application is primarily designed to explore and visualize HIV-1
-mutations from the Long-Term Evolution Experiment (LTEE) published in
-(link to DOI).</p>
-<p>Alternatively, it allows users to upload their own datasets using
-standard format files to:</p>
-<ul>
-<li>explore the mutation data through an interactive data table</li>
-<li>visualize mutation data through an integrated genome browser over
-multiple lineages</li>
-<li>track mutation trajectories over time</li>
-</ul>
+<p>LTEEviz is designed to access, explore, and visualize HIV-1 mutations
+from the Long-Term Evolution Experiment (LTEE) published in (link to
+DOI).</p>
 <p>The application is divided into several sections, each accessible
-from the navigation bar at the top of the page. First step would be to
-navigate to the <strong>Data Upload</strong> tab to load the data.</p>
+from the navigation box at the top of the page. Below you can find a
+brief overview of each section:</p>
 <p><br> <br></p>
 <hr />
 </div>
-<div id="dataUpload" class="section level1">
-<h1>Data Upload</h1>
+<div id="dataAccess" class="section level1">
+<h1>Data Access</h1>
 <p><br></p>
-<p>In this section, you can either load the pre-existing <strong>LTEE
-HIV-1 dataset</strong> or upload your <strong>own experimental
-dataset</strong> for visualization and analysis.</p>
+<p>In this section, you can download the processed data for <strong>LTEE
+HIV-1 dataset</strong>.</p>
 <p><br></p>
 <div id="sidebar-controls" class="section level2">
 <h2>➡️ Sidebar Controls</h2>
-<p>A radio button allows you to select the source of genomic data:</p>
-<ul>
-<li><strong>LTEE HIV-1</strong> (default)</li>
-<li><strong>Own data</strong></li>
-</ul>
-<div id="option-1-load-ltee-hiv-1-dataset" class="section level3">
-<h3>Option 1: Load LTEE HIV-1 Dataset</h3>
-<p>Click the <strong>Load LTEE HIV-1 data</strong> button to
-automatically load a preprocessed version of the HIV-1 NL4_3 genome
-along with its annotation and mutation data.</p>
-</div>
-<div id="option-2-upload-own-data" class="section level3">
-<h3>Option 2: Upload Own Data</h3>
-<p>Switch the <strong>Data Source</strong> to <code>Own data</code> to
-manually upload your files by providing <strong>absolute file
-paths</strong>.</p>
-<div id="required-inputs" class="section level4">
-<h4>Required Inputs:</h4>
-<ul>
-<li><p><strong>Genome name</strong><br />
-An arbitrary name for your reference genome (e.g.,
-<code>&quot;HIV-1 NL4-3&quot;</code>).</p></li>
-<li><p><strong>Reference genome</strong><br />
-A <u>FASTA</u> file containing your reference genome sequence.</p></li>
-<li><p><strong>Annotation file</strong><br />
-A <u>GFF3</u> file containing the genomic feature annotations. Such
-files for the model organism of interest can. be downloaded from the
-NCBI or Ensembl databases.</p></li>
-<li><p><strong>Mutation file</strong><br />
-A <u>VCF</u> file containing the variant calls. This file should be in
-VCF format, which is a standard format for storing genetic variants. For
-specifications on the INFO field of the VCF file, please see
-below.</p></li>
-</ul>
 <p><br></p>
-</div>
-</div>
-</div>
-<div id="info-field-specifications" class="section level2">
-<h2>INFO Field Specifications</h2>
-<p>The INFO field of the VCF file can be used to store metadata
-information regarding sequencing quality, functional annotation, and
-temporal information. The following tags are required:</p>
+<div id="dataset-selection" class="section level3">
+<h3>Dataset Selection</h3>
+<p>First radio button allows you to select the source of the genomic
+data for download:</p>
 <ul>
-<li><strong>COVERAGE</strong><br />
-Sequencing coverage at the mutation position.</li>
-<li><strong>VF</strong><br />
-Variant frequency of the mutation in the population.</li>
-<li><strong>PASSAGE</strong><br />
-Passage number indicating the time point of the mutation in the
-experiment.</li>
-<li><strong>LINE</strong><br />
-Lineage identifier for the mutation, e.g., “L1”, “L2”, etc.</li>
+<li><strong>LTEE HIV-1 EXP-2E</strong> (default)</li>
+<li><strong>LTEE HIV-1 EXP-SB</strong></li>
 </ul>
-<p>Additional optional tags can be added for a more completed annotation
-of the mutations:</p>
-<ul>
-<li><strong>MT</strong><br />
-Mutation type, e.g., “P” for point mutation, “I” for small insertion,
-and “D” for deletion.</li>
-</ul>
-<p><br></p>
 </div>
-<div id="notes-and-tips" class="section level2">
-<h2>📝 Notes and Tips</h2>
+<div id="data-format-selection" class="section level3">
+<h3>Data Format Selection</h3>
+<p>Second radio button allows you to select the format of the genomic
+data for download:</p>
 <ul>
-<li>The FASTA reference file must be accompanied by an index file
-(<code>.fai</code>) in the same directory. The index file can be
-generated by <code>samtools faidx</code> command.</li>
-<li>The VCF mutation file must be accompanied by an index file
-(<code>.csi</code>) in the same directory. The index file can be
-generated by <code>bcftools index</code> command.</li>
+<li><strong>VCF</strong> (default)</li>
+<li><strong>CSV</strong></li>
 </ul>
 <p><br> <br></p>
 <hr />
 </div>
 </div>
-<div id="dataTable" class="section level1">
-<h1>Data Table</h1>
+</div>
+<div id="mutationTable" class="section level1">
+<h1>Mutation Table</h1>
 <p><br></p>
 <p>The <strong>mutation Table</strong> tab allows you to explore,
 filter, and inspect annotated mutation data. The table updates in real
@@ -123,7 +60,6 @@ time as you apply filters from the sidebar.</p>
 mutation dataset:</p>
 <div id="lineage-selection" class="section level3">
 <h3>Lineage Selection</h3>
-<p><strong>Control:</strong> <code>Select lineage(s)</code></p>
 <p>Choose one or more experimental lineages to include in the table.
 Each lineage represents a sample or replicate (e.g.,
 <code>MT-2_1</code>, <code>MT-4_2</code>). You can select multiple
@@ -131,14 +67,12 @@ lineages simultaneously.</p>
 </div>
 <div id="passage-selection" class="section level3">
 <h3>Passage Selection</h3>
-<p><strong>Control:</strong> <code>Passage</code></p>
 <p>Select the time point (passage number) of interest. Available
 passages range from <strong>10 to 500</strong> (every 10 passages). Only
 mutations present at the selected passage will be shown.</p>
 </div>
 <div id="variant-frequency-range" class="section level3">
 <h3>Variant Frequency Range</h3>
-<p><strong>Control:</strong> <code>Variant Frequency Range</code></p>
 <p>Use this slider to filter mutations based on their variant frequency
 (VF). This helps focus on mutations with higher or lower prevalence. The
 range is from <strong>0.00 to 1.00</strong>, and the default is
@@ -146,7 +80,6 @@ range is from <strong>0.00 to 1.00</strong>, and the default is
 </div>
 <div id="translational-impact" class="section level3">
 <h3>Translational Impact</h3>
-<p><strong>Control:</strong> <code>Translational Impact(s)</code></p>
 <p>Choose one or more categories of functional impact on protein
 translation:</p>
 <ul>
@@ -161,8 +94,6 @@ categories.</p>
 </div>
 <div id="filter-mode" class="section level3">
 <h3>Filter Mode</h3>
-<p><strong>Control:</strong>
-<code>Filter by: Position / Feature</code></p>
 <p>This radio button lets you choose how to further refine the mutation
 list:</p>
 <ul>
@@ -175,7 +106,6 @@ range</li>
 <div id="position-input" class="section level3">
 <h3>Position Input</h3>
 <p>Shown only when “Position” is selected above.</p>
-<p><strong>Control:</strong> <code>Position</code></p>
 <p>You can enter: - A <strong>single position</strong> (e.g.,
 <code>9512</code>) - A <strong>range</strong> (e.g.,
 <code>9510-9522</code>) - Whitespace is ignored</p>
@@ -184,7 +114,6 @@ range</li>
 <div id="feature-selection" class="section level3">
 <h3>Feature Selection</h3>
 <p>Shown only when “Feature” is selected above.</p>
-<p><strong>Control:</strong> <code>Feature(s)</code></p>
 <p>Check one or more genomic features to filter mutations. Selecting
 <strong>“All”</strong> includes all features automatically.</p>
 <p><br></p>
@@ -216,7 +145,7 @@ passage</li>
 <p><br></p>
 </div>
 </div>
-<div id="notes-and-tips-1" class="section level2">
+<div id="notes-and-tips" class="section level2">
 <h2>📝 Notes and Tips</h2>
 <ul>
 <li>To view mutations across all lineages at a passage, select all
@@ -350,8 +279,8 @@ strand.</li>
 <hr />
 </div>
 </div>
-<div id="mutationFrequencyTracker" class="section level1">
-<h1>Mutation Frequency Tracker</h1>
+<div id="mutationFrequencyDynamics" class="section level1">
+<h1>Mutation Frequency Dynamics</h1>
 <p><br></p>
 <p>The <strong>Frequency Tracker</strong> tab provides an interactive,
 lineage-specific visualization of how individual mutations change in
@@ -445,4 +374,7 @@ filtered by <code>mut_info</code> and <code>exp_line</code>.</li>
 theme</strong> with large, readable text.</li>
 </ul>
 </div>
+</div>
+<div id="publicationFigures" class="section level1">
+<h1>Publication Figures</h1>
 </div>

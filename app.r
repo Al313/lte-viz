@@ -29,9 +29,11 @@ ui <- fluidPage(
         tab1UI("tab1"),
         tab2UI("tab2"),
         tab3UI("tab3"),
-        tab4UI("tab4")
+        tab4UI("tab4"),
+        tab5UI("tab5")
     )
 )
+
 server <- function(input, output, session) {
     
     # Store references to module data for cleanup
@@ -75,6 +77,8 @@ server <- function(input, output, session) {
     tab3Server("tab3", options = options, annotation_file = annotation_file, module_data = module_data)
     
     tab4Server("tab4", mutation_data = mutation_data)
+
+    tab5Server("tab5")
 }
 
 shinyApp(ui, server)

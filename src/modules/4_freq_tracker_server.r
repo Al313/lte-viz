@@ -12,8 +12,36 @@ tab4Server <- function(id, mutation_data) {
         # Reactive filtered data
         filter_data <- eventReactive(input$load_plot, {
             req(input$mutCase1, input$lineage)
-            df[df$mut_info %in% c(input$mutCase1, input$mutCase2) &
+            # Collect all mutation inputs dynamically
+            mut_inputs <- c(input$mutCase1, input$mutCase2, input$mutCase3, input$mutCase4)
+            mut_inputs <- mut_inputs[mut_inputs != ""]  # remove empty strings
+
+            filtered <- df[df$mut_info %in% mut_inputs &
                 df$exp_line %in% input$lineage, ]
+            filtered$mut_info <- factor(filtered$mut_info, levels = mut_inputs)
+            filtered
+        })
+
+        # Track number of mutation inputs added
+        rv <- reactiveValues(mutCount = 2)  # starts with 2 inputs
+
+        observeEvent(input$addMutInput, {
+            if (rv$mutCount >= 4) {
+                showNotification("Maximum of 4 mutation IDs allowed.", type = "message")
+                return()
+            }
+
+            rv$mutCount <- rv$mutCount + 1
+            mut_id <- paste0("mutCase", rv$mutCount)
+            
+            insertUI(
+                selector = paste0("#", session$ns("mutInputsContainer")),
+                where = "beforeEnd",
+                ui = textInput(session$ns(mut_id),
+                            label = paste0("Insert mutation id ", rv$mutCount, " (optional):"),
+                            value = "",
+                            placeholder = "format: position_ref_alt")
+            )
         })
 
         # Frequency trajectory plot (plotly)

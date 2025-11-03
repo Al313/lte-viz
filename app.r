@@ -29,8 +29,7 @@ ui <- fluidPage(
         tab1UI("tab1"),
         tab2UI("tab2"),
         tab3UI("tab3"),
-        tab4UI("tab4"),
-        tab5UI("tab5")
+        tab4UI("tab4")
     )
 )
 
@@ -78,7 +77,6 @@ server <- function(input, output, session) {
     
     tab4Server("tab4", mutation_data = mutation_data)
 
-    tab5Server("tab5")
 }
 
 shinyApp(ui, server)

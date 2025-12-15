@@ -20,8 +20,6 @@ library(plotly)
 invisible(lapply(list.files(path = "src/modules", pattern = "\\.R$", full.names = TRUE), source))
 
 
-
-
 ui <- fluidPage(
     theme = shinytheme("readable"),
     navbarPage("LTEEviz",  id = "mainTabs",

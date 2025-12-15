@@ -27,9 +27,6 @@ tab0Server <- function(id) {
             session$sendCustomMessage("scrollTo", list(id = "mutationFrequencyDynamics"))
         })
 
-        observeEvent(input$goto_pub_figures, {
-            session$sendCustomMessage("scrollTo", list(id = "publicationFigures"))
-        })
     })
 }
 

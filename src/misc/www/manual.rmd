@@ -35,7 +35,7 @@ In this section, you can download the processed data for **LTEE HIV-1 dataset**.
 First radio button allows you to select the source of the genomic data for download:
 
 - **LTEE HIV-1 EXP-2E** (default)
-- **LTEE HIV-1 EXP-SB**
+- **LTEE HIV-1 EXP-SB** (currecntly unavailable)
 
 ### Data Format Selection
 
@@ -58,79 +58,130 @@ Second radio button allows you to select the format of the genomic data for down
 
 The **mutation Table** tab allows you to explore, filter, and inspect annotated mutation data. The table updates in real time as you apply filters from the sidebar.
 
+This view is intended for detailed inspection of mutation-level data at a specific passage, lineage, and frequency range.
 <br>
 
 ## ➡️ Sidebar Controls
 
-The left panel offers several input controls for filtering the mutation dataset:
+The left-hand panel provides several controls to filter the mutation dataset:
 
 ### Lineage Selection
 
-Choose one or more experimental lineages to include in the table. Each lineage represents a sample or replicate (e.g., `MT-2_1`, `MT-4_2`). You can select multiple lineages simultaneously.
+- **Input:** Checkbox group  
+- **Label:** *Select lineage(s):*
+
+Choose one or more experimental lineages to include in the table. You can select multiple lines simultaneously.
 
 
 ### Passage Selection
 
-Select the time point (passage number) of interest. Available passages range from **10 to 500** (every 10 passages). Only mutations present at the selected passage will be shown.
+- **Input:** Dropdown  
+- **Label:** *Passage:*
 
+Select the passage (time point) to display mutations from. Available passages range from **10 to 500**, in steps of **10**.  
+Only mutations detected at the selected passage will be shown.
 
 ### Variant Frequency Range
 
-Use this slider to filter mutations based on their variant frequency (VF). This helps focus on mutations with higher or lower prevalence. The range is from **0.00 to 1.00**, and the default is **0.01 to 1.00**.
+- **Input:** Slider  
+- **Label:** *Variant Frequency Range:*
 
+Filter mutations based on their allele (variant) frequency.
 
-### Translational Impact
-
-Choose one or more categories of functional impact on protein translation:
-
-- **Any**: No filtering by impact (default)
-- **Untranslated (U)**: Located in UTR or intergenic regions
-- **Synonymous (S)**: No change in amino acid
-- **Non-synonymous (N)**: Alters amino acid sequence
-
-Selecting **"Any"** automatically includes all categories.
-
+- **Minimum:** 0  
+- **Maximum:** 1  
+- **Default range:** 0.01 to 1.00  
+- **Step size:** 0.01  
 
 ### Filter Mode
 
-This radio button lets you choose how to further refine the mutation list:
+- **Input:** Radio buttons  
+- **Label:** *Filter by:*
 
-- **Position**: Filter by specific genomic position or range
-- **Feature**: Filter by gene or feature (e.g., *gag*, *pol*, etc.)
+Choose how mutations should be further refined:
 
+- **Feature** (default): Filter mutations by genomic feature and translational impact  
+- **Position**: Filter mutations by exact genomic position or position range  
 
-### Position Input
-
-Shown only when "Position" is selected above.
-
-You can enter:
-- A **single position** (e.g., `9512`)
-- A **range** (e.g., `9510-9522`)
-- Whitespace is ignored
-
-Invalid input triggers a helpful error message.
+Only the controls relevant to the selected mode are displayed.
 
 
-### Feature Selection
-Shown only when "Feature" is selected above.
+`1. Feature-based Filtering`
+
+*Displayed when **Filter by = Feature** is selected.*
+
+### Translational Impact(s)
+
+- **Input:** Multi-select dropdown  
+- **Label:** *Translational Impact(s):*
+
+Select one or more categories describing the functional impact of mutations:
+
+- **Select All**
+- **Untranslated**
+- **Synonymous**
+- **Non-synonymous**
+
+Selecting **Select All** automatically expands the selection to include:
+
+- Untranslated  
+- Synonymous  
+- Non-synonymous  
 
 
-Check one or more genomic features to filter mutations. Selecting **"All"** includes all features automatically.
+
+### Feature(s)
+
+- **Input:** Checkbox group  
+- **Label:** *Feature(s):*
+
+Select one or more genomic features (genes or regions) to include.
+
+#### All / None Toggle
+
+- **Input:** Checkbox  
+- **Label:** *All/None*
+
+When checked (default), **all features** are automatically selected.  
+Unchecking clears the selection, allowing manual feature choice.
+
+
+`2. Position-based Filtering`
+
+*Displayed when **Filter by = Position** is selected.*
+
+### Position
+
+- **Input:** Text input  
+- **Label:** *Position:*
+
+Specify a genomic position or range:
+
+- **Single position:** 678 
+- **Position range:** 678-700
+
+Whitespace is ignored.
+
+**Input validation:**
+
+- If the start position is greater than the end position, an error notification is shown.
+- Invalid formats (e.g. letters or malformed ranges) trigger a helpful error message.
+- Invalid input results in an empty table rather than crashing the app.
 
 <br>
 
 ## 𓊂 Main Panel: Mutation Table
 
-The main panel displays a dynamic table of mutations based on the filters applied. Columns in the table include (depending on your data):
+The main panel displays a dynamic table of mutations based on the filters applied. The table displays the following fields:
 
 - **genomic_pos**: Genomic position of the mutation
 - **variant_freq**: Variant frequency at selected passage
 - **exp_line**: Experimental lineage
 - **feature**: Associated gene or region
 - **effect_simplified**: Translational impact (A/U/S/N)
-- And possibly others from the dataset
+- Additional annotation fields present in the dataset
 
-### Features of the table:
+### Table Features:
 - Pagination (10 rows per page)
 - Search box (top-right)
 - Sortable columns (click headers)
@@ -141,9 +192,9 @@ The main panel displays a dynamic table of mutations based on the filters applie
 ## 📝 Notes and Tips
 
 - To view mutations across all lineages at a passage, select all lineages.
-- Use **Variant Frequency** to highlight highly prevalent mutations.
+- Use **Variant Frequency** to filter for highly prevalent mutations.
 - Toggle between **Position** and **Feature** for flexible region-specific filtering.
-- Invalid inputs (e.g., `abc` or reversed ranges) show notifications without crashing the app.
+- Invalid inputs (e.g., abc or reversed ranges) invoke a warning message.
 
 <br>
 <br>
@@ -154,7 +205,7 @@ The main panel displays a dynamic table of mutations based on the filters applie
 
 <br>
 
-The **Genome Browser** tab integrates the [IGV.js](https://igv.org) genome visualization tool via the `igvShiny` package. This view allows users to explore the genome of the model organism of interest,
+The **Genome Browser** tab integrates the [IGV.js](https://igv.org) genome visualization tool via the <u>igvShiny</u> package. This view allows users to explore the genome of the model organism of interest,
 overlay annotated features, and dynamically load mutation tracks filtered by lineage, passage, and variant frequency.
 
 <br>
@@ -176,12 +227,12 @@ The annotation track is shown in **expanded mode** with color-coded feature type
 ### Add Mutation Track
 **Button:** `Add Mutation Track`
 
-Clicking this adds a new mutation filtering panel and prepares to overlay a new track.
+Clicking this adds a new mutation filtering panel and prepares to overlay a new track. You can add up to 4 mutation filtering panels and corresponding tracks simultaneously.
 
 Each **mutation track** allows fine-grained filtering with the following controls:
 
 #### Lineage
-**Dropdown:** `Lineage`
+**Dropdown:** `lineage`
 
 Select the experimental lineage (e.g., `MT-2_1`, `MT-4_2`) for which you want to visualize mutations.
 
@@ -215,7 +266,6 @@ The right-hand panel contains the interactive **IGV genome browser** initialized
 
 - Genome: **HIV-1 NL4-3**
 - Default locus: `AF324493.2:600–700`
-- Reference FASTA and index files loaded locally
 - GFF3 annotations available via `Add Genomic Features`
 
 ### Key Features:
@@ -239,9 +289,8 @@ The right-hand panel contains the interactive **IGV genome browser** initialized
 
 ## 📝 Notes & Tips
 
-- All files are accessed locally (FASTA, GFF3, and VCF).
-- Mutation metadata includes `VF`, `LINE`, and `PASSAGE`, which are used for filtering.
-- Mutations are color-encoded per track but not per consequence or strand.
+
+- Hover your pointer over each mutation to display its metadata. Mutation metadata includes `VF`, `LINE`, and `PASSAGE`, which are used for filtering.
 
 <br>
 <br>
@@ -252,73 +301,112 @@ The right-hand panel contains the interactive **IGV genome browser** initialized
 
 <br>
 
-The **Frequency Tracker** tab provides an interactive, lineage-specific visualization of how individual mutations change in frequency over experimental passages. This is especially useful for understanding mutation dynamics, selection patterns, and lineage divergence in long-term evolution experiments.
+The Frequency Dynamics tab provides interactive visualizations of mutation frequency behavior across experimental lineages. It supports two complementary views:
+(i) an animated frequency distribution summarizing genome-wide dynamics, and
+(ii) frequency trajectories of specific mutations over time.
 
 <br>
 
 ## ➡️ Sidebar Controls
 
-The left panel contains two main inputs that determine what will be plotted:
+The left panel contains inputs that control what is displayed in the main panel.
 
-### Select Lineage(s)
-**Input Type:** `checkboxGroupInput`  
-**Label:** `Select lineage(s):`
+### Display Mode
+**Input Type:** radioButtons  
+**Label:** Display mode:
 
-Choose one or more lineages to include in the plot. Each lineage corresponds to a replicate or condition from your experiment (e.g., `MT-2_1`, `MT-4_2`).
+Choose between two visualization modes:
 
-### Insert Mutation ID
-**Input Type:** `textInput`  
-**Label:** `Insert mutation id:`  
-**Format Required:** `position_ref_alt` (e.g., `566_G_A`)
+- **Frequency distribution** – displays an animated GIF summarizing mutation frequency distributions over time.
+- **Frequency trajectory** – enables detailed tracking of one or more specific mutations across passages.
 
-Specify the mutation you want to track. The format must follow the pattern:
+Additional controls appear only when **Frequency trajectory** is selected:
 
-For example:
-- `566_G_A` means a G-to-A mutation at position 566.
-- `1234_T_C` means a T-to-C mutation at position 1234.
+
+#### Select Lineage(s)
+**Input Type:** checkboxGroupInput
+**Label:** Select lineage(s):
+
+Choose one or more experimental lineages to include in the plot (e.g., `MT-2_1`, `MT-4_2`).  
+Each lineage is plotted using a distinct color.
+
+### Insert Mutation ID(s)
+**Input Type:** textInput (dynamic, up to 4)  
+**Labels:**  
+- `Insert mutation id 1:`  
+- `Insert mutation id 2 (optional):`  
+- `Insert mutation id 3 (optional):`  
+- `Insert mutation id 4 (optional):`
+
+**Format Required:** position_ref_alt (e.g., `566_G_A`)
+
+Specify one or more mutations to track. Mutation IDs must follow the format:
+
+- `566_G_A` → G-to-A mutation at position 566  
+- `1234_T_C` → T-to-C mutation at position 1234  
+
+Use the **“Add another mutation”** button to include additional mutations (maximum of four).
+
+
+### Load Plot
+**Input Type:** `actionButton`  
+**Label:** `Load Plot`
+
+After selecting lineages and entering mutation IDs, click **Load Plot** to render the trajectory plot.  
+The plot is not updated automatically to avoid unnecessary recomputation.
 
 <br>
 
-## 📈 Main Panel: Mutation Trajectory Plot
 
-The right-hand panel shows the **trajectory of the selected mutation(s)** over time (measured in passages).
+## 📈 Main Panel: Frequency Distribution and Dynamics
 
-### Plot Details:
+When **Frequency distribution** is selected, the main panel displays a pre-generated animated GIF illustrating the distribution of mutation frequencies over time.
 
-- **X-axis**: Passage number (transfer/time point)
-- **Y-axis**: Mutation frequency (on a log scale)
-  - Displayed as log10-scaled but labeled for interpretability:
+This view provides a temporal overview of genome-wide frequency dynamics across passages.
+
+<br>
+
+When **Frequency trajectory** is selected, the right-hand panel displays the **temporal trajectories of the selected mutation(s)** across passages. Details of the plot:
+
+- **X-axis**: Transfer number (passage)
+- **Y-axis**: Variant frequency (log₁₀ scale)
+  - Common reference points:
     - `1` → 100%
     - `0.1` → 10%
     - `0.01` → 1%
-    - `0.001` → 0.1%
-- **Line color**: Indicates experimental lineage
-- **Interactive tooltips** (via Plotly): Hover to inspect passage and frequency values
+- **Line color**: Experimental lineage
+- **Line type**: Mutation ID  
+  (allows multiple mutations to be distinguished within the same lineage)
+- **Grouping**: Each curve represents a unique *mutation × lineage* combination
+- **Interactive tooltips** (via Plotly): Hover to inspect passage number and frequency
+
+The legend is displayed horizontally above the plot for compact comparison.
 
 <br>
 
 ## 🛠 Troubleshooting
 
-- **Blank plot?**  
-  - Double-check the mutation ID format (e.g., no extra spaces).
+- **No lines appear after clicking “Load Plot”?**
+  - Check that mutation IDs follow the correct format (`position_ref_alt`).
   - Ensure at least one lineage is selected.
-  - Confirm the mutation exists in your data.
-  
-- **Y-axis hard to interpret?**  
-  - Note that the plot uses `log10(frequency)` to capture small values clearly.
+  - Confirm that the specified mutation(s) exist in the dataset.
 
-- **Multiple lines overlap?**  
-  - You can deselect lineages to declutter the plot.
+- **Received a “No records found” message?**
+  - The selected combination of mutation ID(s) and lineage(s) does not occur in the data.
+
+- **Y-axis difficult to interpret?**
+  - Frequencies are shown on a log₁₀ scale to clearly display low-frequency variants.
+
+- **Plot looks cluttered?**
+  - Reduce the number of selected lineages or mutations.
 
 <br>
 
 ## 📝 Notes & Tips
 
-- You can compare the same mutation across multiple lineages.
-- Only mutations present in your dataset will result in plotted lines. Typos or non-existent mutations will yield an empty plot.
+- You can compare **multiple mutations simultaneously**, across one or more lineages.
+- A maximum of **four mutation IDs** can be visualized at once.
+- Only mutations present in the dataset will be plotted; invalid or misspelled IDs will produce no output.
 - Backend data: Uses the `mutation_data` data frame filtered by `mut_info` and `exp_line`.
-- Each curve is uniquely identified by `mut_info + lineage` (to allow multiple lineages per mutation).
-- Styling: The plot uses a **custom publication-style ggplot theme** with large, readable text.
-
-
-# Publication Figures  {#publicationFigures}
+- Each trajectory is uniquely identified by `mut_info + lineage`.
+- Styling: The plot uses a clean, publication-oriented ggplot theme optimized for readability.

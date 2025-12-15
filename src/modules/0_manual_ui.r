@@ -14,8 +14,7 @@ tab0UI <- function(id) {
                     tags$li(actionLink(ns("goto_data_access"), "Data Access")),
                     tags$li(actionLink(ns("goto_mutation_table"), "Mutation Table")),
                     tags$li(actionLink(ns("goto_genome_browser"), "Genome Browser")),
-                    tags$li(actionLink(ns("goto_freq_dynamics"), "Mutation Frequency Dynamics")),
-                    tags$li(actionLink(ns("goto_pub_figures"), "Publication Figures"))
+                    tags$li(actionLink(ns("goto_freq_dynamics"), "Mutation Frequency Dynamics"))
                 )
             ),
 

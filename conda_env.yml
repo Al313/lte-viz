@@ -1,4 +1,4 @@
-name: lteviz
+name: lteeviz
 channels:
   - conda-forge
   - bioconda

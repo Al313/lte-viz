@@ -37,6 +37,15 @@ tab1Server <- function(id) {
             ## what actually happens on click
             content = function(file) {
 
+                if (input$dataSourceChoice == "LTEE HIV-1 EXP-2E") {
+                    showNotification(
+                        "Data for LTEE HIV-1 EXP-2E is not currently downloadable and will be released after publication.",
+                        type = "warning",
+                        duration = 10
+                    )
+                    return(NULL)
+                }
+
                 ## EXP-SB → block download + message
                 if (input$dataSourceChoice == "LTEE HIV-1 EXP-SB") {
                     showNotification(

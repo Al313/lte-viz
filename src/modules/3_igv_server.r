@@ -98,7 +98,7 @@ tab3Server <- function(id, options, annotation_file, module_data) {
                     h4(paste("Mutation Track", idx)),
                     selectInput(session$ns(paste0("lineage", track_ns)), "Lineage:", 
                             choices = c("MT-2_1","MT-2_2","MT-4_1","MT-4_2"), selected = "MT-2_1"),
-                    selectInput(session$ns(paste0("passage", track_ns)), "Passage:", 
+                    selectInput(session$ns(paste0("passage", track_ns)), "Transfer:", 
                             choices = as.character(seq(10, 500, 10)), selected = "100"),
                     sliderInput(session$ns(paste0("af_range", track_ns)), "Variant Frequency Range:", 
                             min = 0, max = 1, value = c(0.01, 1), step = 0.01),

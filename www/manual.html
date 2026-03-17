@@ -5,13 +5,13 @@
 <h1>Introduction</h1>
 <p><br></p>
 <p>Welcome to the LTEEviz application.</p>
-<p>LTEEviz is designed to enable interested parties to visually and
+<p>LTEEviz is designed to allow interested parties to visually and
 interactively explore the curated mutation data from the HIV-1 Long-Term
-Evolution Experiment (LTEE) published in <a href="https://doi.org/10.64898/2026.02.04.700995">Movasati et al.</a>
+Evolution Experiment (LTEE) published on bioRxiv in <a href="https://doi.org/10.64898/2026.02.04.700995">Movasati et al.</a>
 (2026).</p>
 <p>This manual provides a complete guide to using the features of this
-tool. The application is divided into several sections, reachable from
-the navigation bar at the top of the page. Below you can find a brief
+tool. The application is divided into four sections, reachable from the
+navigation bar at the top of the page. Below you can find a brief
 overview of each section:</p>
 <p><br> <br></p>
 <hr />
@@ -19,23 +19,27 @@ overview of each section:</p>
 <div id="dataAccess" class="section level1">
 <h1>Data Access</h1>
 <p><br></p>
-<p>In this section, you can download the processed data for <strong>LTEE
-HIV-1 dataset</strong>.</p>
+<p>In this section, you can download the curated data for <strong>LTEE
+HIV-1 datasets</strong>. (!! please note that the data will not be
+available for download until after publication in a peer-reviewed
+journal.)</p>
 <p><br></p>
 <div id="sidebar-controls" class="section level2">
 <h2>➡️ Sidebar Controls</h2>
 <p><br></p>
 <div id="dataset-selection" class="section level3">
 <h3>Dataset Selection</h3>
+<p><strong>Button:</strong> <code>Choose the source of data</code></p>
 <p>First radio button allows you to select the source of the genomic
 data for download:</p>
 <ul>
 <li><strong>LTEE HIV-1 EXP-2E</strong> (default)</li>
-<li><strong>LTEE HIV-1 EXP-SB</strong> (currecntly unavailable)</li>
+<li><strong>LTEE HIV-1 EXP-SB</strong> (currently unavailable)</li>
 </ul>
 </div>
 <div id="data-format-selection" class="section level3">
 <h3>Data Format Selection</h3>
+<p><strong>Button:</strong> <code>Choose the format of data</code></p>
 <p>Second radio button allows you to select the format of the genomic
 data for download:</p>
 <ul>
@@ -54,40 +58,28 @@ data for download:</p>
 filter, and inspect annotated mutation data. The table updates in real
 time as you apply filters from the sidebar.</p>
 <p>This view is intended for detailed inspection of mutation-level data
-at a specific passage, lineage, and frequency range. <br></p>
+at a specific transfer, lineage, and frequency range. <br></p>
 <div id="sidebar-controls-1" class="section level2">
 <h2>➡️ Sidebar Controls</h2>
 <p>The left-hand panel provides several controls to filter the mutation
 dataset:</p>
 <div id="lineage-selection" class="section level3">
 <h3>Lineage Selection</h3>
-<ul>
-<li><strong>Input:</strong> Checkbox group<br />
-</li>
-<li><strong>Label:</strong> <em>Select lineage(s):</em></li>
-</ul>
+<p><strong>Checkbox:</strong> <code>Select lineage(s)</code></p>
 <p>Choose one or more experimental lineages to include in the table. You
 can select multiple lines simultaneously.</p>
 </div>
-<div id="passage-selection" class="section level3">
-<h3>Passage Selection</h3>
-<ul>
-<li><strong>Input:</strong> Dropdown<br />
-</li>
-<li><strong>Label:</strong> <em>Passage:</em></li>
-</ul>
-<p>Select the passage (time point) to display mutations from. Available
-passages range from <strong>10 to 500</strong>, in steps of
+<div id="transfer-selection" class="section level3">
+<h3>Transfer Selection</h3>
+<p><strong>Dropdown:</strong> <code>Transfer</code></p>
+<p>Select the Transfer (time point) to display mutations from. Available
+transfer range from <strong>10 to 500</strong>, in steps of
 <strong>10</strong>.<br />
-Only mutations detected at the selected passage will be shown.</p>
+Only mutations detected at the selected transfer will be shown.</p>
 </div>
 <div id="variant-frequency-range" class="section level3">
 <h3>Variant Frequency Range</h3>
-<ul>
-<li><strong>Input:</strong> Slider<br />
-</li>
-<li><strong>Label:</strong> <em>Variant Frequency Range:</em></li>
-</ul>
+<p><strong>Slider:</strong> <code>Variant Frequency Range</code></p>
 <p>Filter mutations based on their allele (variant) frequency.</p>
 <ul>
 <li><strong>Minimum:</strong> 0<br />
@@ -101,11 +93,7 @@ Only mutations detected at the selected passage will be shown.</p>
 </div>
 <div id="filter-mode" class="section level3">
 <h3>Filter Mode</h3>
-<ul>
-<li><strong>Input:</strong> Radio buttons<br />
-</li>
-<li><strong>Label:</strong> <em>Filter by:</em></li>
-</ul>
+<p><strong>Radio buttons:</strong> <code>Filter by</code></p>
 <p>Choose how mutations should be further refined:</p>
 <ul>
 <li><strong>Feature</strong> (default): Filter mutations by genomic
@@ -115,17 +103,17 @@ feature and translational impact<br />
 position or position range</li>
 </ul>
 <p>Only the controls relevant to the selected mode are displayed.</p>
-<p><code>1. Feature-based Filtering</code></p>
+<p><br></p>
+<div id="feature-based-filtering" class="section level4">
+<h4>1. Feature-based Filtering</h4>
+<p><br></p>
 <p><em>Displayed when <strong>Filter by = Feature</strong> is
 selected.</em></p>
 </div>
-<div id="translational-impacts" class="section level3">
-<h3>Translational Impact(s)</h3>
-<ul>
-<li><strong>Input:</strong> Multi-select dropdown<br />
-</li>
-<li><strong>Label:</strong> <em>Translational Impact(s):</em></li>
-</ul>
+<div id="translational-impacts" class="section level4">
+<h4>Translational Impact(s)</h4>
+<p><strong>Multi-select dropdown:</strong>
+<code>Translational Impact(s)</code></p>
 <p>Select one or more categories describing the functional impact of
 mutations:</p>
 <ul>
@@ -144,37 +132,29 @@ selection to include:</p>
 <li>Non-synonymous</li>
 </ul>
 </div>
-<div id="features" class="section level3">
-<h3>Feature(s)</h3>
-<ul>
-<li><strong>Input:</strong> Checkbox group<br />
-</li>
-<li><strong>Label:</strong> <em>Feature(s):</em></li>
-</ul>
+<div id="features" class="section level4">
+<h4>Feature(s)</h4>
+<p><strong>Checkbox:</strong> <code>Feature(s)</code></p>
 <p>Select one or more genomic features (genes or regions) to
 include.</p>
-<div id="all-none-toggle" class="section level4">
-<h4>All / None Toggle</h4>
-<ul>
-<li><strong>Input:</strong> Checkbox<br />
-</li>
-<li><strong>Label:</strong> <em>All/None</em></li>
-</ul>
+<div id="all-none-toggle" class="section level5">
+<h5>All / None Toggle</h5>
+<p><strong>Checkbox:</strong> <code>All/None</code></p>
 <p>When checked (default), <strong>all features</strong> are
 automatically selected.<br />
 Unchecking clears the selection, allowing manual feature choice.</p>
-<p><code>2. Position-based Filtering</code></p>
+<p><br></p>
+</div>
+</div>
+<div id="position-based-filtering" class="section level4">
+<h4>2. Position-based Filtering</h4>
+<p><br></p>
 <p><em>Displayed when <strong>Filter by = Position</strong> is
 selected.</em></p>
 </div>
-</div>
-<div id="position" class="section level3">
-<h3>Position</h3>
-<ul>
-<li><strong>Input:</strong> Text input<br />
-</li>
-<li><strong>Label:</strong> <em>Position:</em></li>
-</ul>
+<div id="position" class="section level4">
+<h4>Position</h4>
+<p><strong>Text input:</strong> <code>Position</code></p>
 <p>Specify a genomic position or range:</p>
 <ul>
 <li><strong>Single position:</strong> 678</li>
@@ -193,6 +173,7 @@ app.</li>
 <p><br></p>
 </div>
 </div>
+</div>
 <div id="𓊂-main-panel-mutation-table" class="section level2">
 <h2>𓊂 Main Panel: Mutation Table</h2>
 <p>The main panel displays a dynamic table of mutations based on the
@@ -200,7 +181,7 @@ filters applied. The table displays the following fields:</p>
 <ul>
 <li><strong>genomic_pos</strong>: Genomic position of the mutation</li>
 <li><strong>variant_freq</strong>: Variant frequency at selected
-passage</li>
+transfer</li>
 <li><strong>exp_line</strong>: Experimental lineage</li>
 <li><strong>feature</strong>: Associated gene or region</li>
 <li><strong>effect_simplified</strong>: Translational impact
@@ -221,7 +202,7 @@ passage</li>
 <div id="notes-and-tips" class="section level2">
 <h2>📝 Notes and Tips</h2>
 <ul>
-<li>To view mutations across all lineages at a passage, select all
+<li>To view mutations across all lineages at a transfer, select all
 lineages.</li>
 <li>Use <strong>Variant Frequency</strong> to filter for highly
 prevalent mutations.</li>
@@ -240,7 +221,7 @@ message.</li>
 <p>The <strong>Genome Browser</strong> tab integrates the <a href="https://igv.org">IGV.js</a> genome visualization tool via the
 <u>igvShiny</u> package. This view allows users to explore the genome of
 the model organism of interest, overlay annotated features, and
-dynamically load mutation tracks filtered by lineage, passage, and
+dynamically load mutation tracks filtered by lineage, transfer, and
 variant frequency.</p>
 <p><br></p>
 <div id="sidebar-controls-2" class="section level2">
@@ -266,15 +247,15 @@ with the following controls:</p>
 <div id="lineage" class="section level4">
 <h4>Lineage</h4>
 <p><strong>Dropdown:</strong> <code>lineage</code></p>
-<p>Select the experimental lineage (e.g., <code>MT-2_1</code>,
-<code>MT-4_2</code>) for which you want to visualize mutations.</p>
+<p>Select the experimental lineage (e.g., MT-2_1, MT-4_2) for which you
+want to visualize mutations.</p>
 </div>
-<div id="passage" class="section level4">
-<h4>Passage</h4>
-<p><strong>Dropdown:</strong> <code>Passage</code></p>
-<p>Choose the passage (generation time point) from <strong>10</strong>
-to <strong>500</strong>. Only mutations detected at this passage will be
-shown.</p>
+<div id="transfer" class="section level4">
+<h4>Transfer</h4>
+<p><strong>Dropdown:</strong> <code>Transfer</code></p>
+<p>Choose the transfer (generation time point) from <strong>10</strong>
+to <strong>500</strong>. Only mutations detected at this transfer will
+be shown.</p>
 </div>
 <div id="variant-frequency" class="section level4">
 <h4>Variant Frequency</h4>
@@ -303,13 +284,12 @@ initial state.</p>
 </div>
 <div id="main-panel-igv-browser" class="section level2">
 <h2>🧬 Main Panel: IGV Browser</h2>
-<p>The right-hand panel contains the interactive <strong>IGV genome
-browser</strong> initialized with:</p>
+<p>The right-hand panel contains the interactive IGV genome browser
+initialized with:</p>
 <ul>
-<li>Genome: <strong>HIV-1 NL4-3</strong></li>
-<li>Default locus: <code>AF324493.2:600–700</code></li>
-<li>GFF3 annotations available via
-<code>Add Genomic Features</code></li>
+<li>Genome: HIV-1 NL4-3</li>
+<li>Default locus: AF324493.2:600–700</li>
+<li>GFF3 annotations available via Add Genomic Features</li>
 </ul>
 <div id="key-features" class="section level3">
 <h3>Key Features:</h3>
@@ -330,7 +310,7 @@ browser</strong> initialized with:</p>
 <ul>
 <li><strong>“No mutations found for selected filters”</strong>: Your
 filters may be too strict. Try broadening the VF range or selecting a
-different passage.</li>
+different transfer.</li>
 <li><strong>Track not appearing</strong>: Ensure that the correct
 filters are set and that genomic features have been added if
 needed.</li>
@@ -343,8 +323,8 @@ at once if browser becomes sluggish.</li>
 <h2>📝 Notes &amp; Tips</h2>
 <ul>
 <li>Hover your pointer over each mutation to display its metadata.
-Mutation metadata includes <code>VF</code>, <code>LINE</code>, and
-<code>PASSAGE</code>, which are used for filtering.</li>
+Mutation metadata includes VF, LINE, and PASSAGE, which are used for
+filtering.</li>
 </ul>
 <p><br> <br></p>
 <hr />
@@ -365,50 +345,40 @@ specific mutations over time.</p>
 main panel.</p>
 <div id="display-mode" class="section level3">
 <h3>Display Mode</h3>
-<p><strong>Input Type:</strong> radioButtons<br />
-<strong>Label:</strong> Display mode:</p>
+<p><strong>Radio buttons:</strong> <code>Display mode</code></p>
 <p>Choose between two visualization modes:</p>
 <ul>
 <li><strong>Frequency distribution</strong> – displays an animated GIF
 summarizing mutation frequency distributions over time.</li>
 <li><strong>Frequency trajectory</strong> – enables detailed tracking of
-one or more specific mutations across passages.</li>
+one or more specific mutations across transfers.</li>
 </ul>
 <p>Additional controls appear only when <strong>Frequency
 trajectory</strong> is selected:</p>
 <div id="select-lineages" class="section level4">
 <h4>Select Lineage(s)</h4>
-<p><strong>Input Type:</strong> checkboxGroupInput
-<strong>Label:</strong> Select lineage(s):</p>
+<p><strong>Checkbox:</strong> <code>Select lineage(s)</code></p>
 <p>Choose one or more experimental lineages to include in the plot
-(e.g., <code>MT-2_1</code>, <code>MT-4_2</code>).<br />
+(e.g., MT-2_1, MT-4_2).<br />
 Each lineage is plotted using a distinct color.</p>
 </div>
 </div>
 <div id="insert-mutation-ids" class="section level3">
 <h3>Insert Mutation ID(s)</h3>
-<p><strong>Input Type:</strong> textInput (dynamic, up to 4)<br />
-<strong>Labels:</strong><br />
-- <code>Insert mutation id 1:</code><br />
-- <code>Insert mutation id 2 (optional):</code><br />
-- <code>Insert mutation id 3 (optional):</code><br />
-- <code>Insert mutation id 4 (optional):</code></p>
-<p><strong>Format Required:</strong> position_ref_alt (e.g.,
-<code>566_G_A</code>)</p>
+<p><strong>Text input:</strong> <code>Insert mutation id</code></p>
 <p>Specify one or more mutations to track. Mutation IDs must follow the
 format:</p>
 <ul>
-<li><code>566_G_A</code> → G-to-A mutation at position 566<br />
+<li>566_G_A → G-to-A mutation at position 566<br />
 </li>
-<li><code>1234_T_C</code> → T-to-C mutation at position 1234</li>
+<li>1234_T_C → T-to-C mutation at position 1234</li>
 </ul>
 <p>Use the <strong>“Add another mutation”</strong> button to include
 additional mutations (maximum of four).</p>
 </div>
 <div id="load-plot" class="section level3">
 <h3>Load Plot</h3>
-<p><strong>Input Type:</strong> <code>actionButton</code><br />
-<strong>Label:</strong> <code>Load Plot</code></p>
+<p><strong>Button:</strong> <code>Load Plot</code></p>
 <p>After selecting lineages and entering mutation IDs, click
 <strong>Load Plot</strong> to render the trajectory plot.<br />
 The plot is not updated automatically to avoid unnecessary
@@ -422,20 +392,20 @@ recomputation.</p>
 panel displays a pre-generated animated GIF illustrating the
 distribution of mutation frequencies over time.</p>
 <p>This view provides a temporal overview of genome-wide frequency
-dynamics across passages.</p>
+dynamics across transfers.</p>
 <p><br></p>
 <p>When <strong>Frequency trajectory</strong> is selected, the
 right-hand panel displays the <strong>temporal trajectories of the
-selected mutation(s)</strong> across passages. Details of the plot:</p>
+selected mutation(s)</strong> across transfers. Details of the plot:</p>
 <ul>
-<li><strong>X-axis</strong>: Transfer number (passage)</li>
+<li><strong>X-axis</strong>: Transfer number (transfer)</li>
 <li><strong>Y-axis</strong>: Variant frequency (log₁₀ scale)
 <ul>
 <li>Common reference points:
 <ul>
-<li><code>1</code> → 100%</li>
-<li><code>0.1</code> → 10%</li>
-<li><code>0.01</code> → 1%</li>
+<li>1 → 100%</li>
+<li>0.1 → 10%</li>
+<li>0.01 → 1%</li>
 </ul></li>
 </ul></li>
 <li><strong>Line color</strong>: Experimental lineage</li>
@@ -445,7 +415,7 @@ lineage)</li>
 <li><strong>Grouping</strong>: Each curve represents a unique
 <em>mutation × lineage</em> combination</li>
 <li><strong>Interactive tooltips</strong> (via Plotly): Hover to inspect
-passage number and frequency</li>
+transfer number and frequency</li>
 </ul>
 <p>The legend is displayed horizontally above the plot for compact
 comparison.</p>
@@ -457,7 +427,7 @@ comparison.</p>
 <li><strong>No lines appear after clicking “Load Plot”?</strong>
 <ul>
 <li>Check that mutation IDs follow the correct format
-(<code>position_ref_alt</code>).</li>
+(position_ref_alt).</li>
 <li>Ensure at least one lineage is selected.</li>
 <li>Confirm that the specified mutation(s) exist in the dataset.</li>
 </ul></li>
@@ -487,10 +457,9 @@ across one or more lineages.</li>
 once.</li>
 <li>Only mutations present in the dataset will be plotted; invalid or
 misspelled IDs will produce no output.</li>
-<li>Backend data: Uses the <code>mutation_data</code> data frame
-filtered by <code>mut_info</code> and <code>exp_line</code>.</li>
-<li>Each trajectory is uniquely identified by
-<code>mut_info + lineage</code>.</li>
+<li>Backend data: Uses the mutation_data data frame filtered by mut_info
+and exp_line.</li>
+<li>Each trajectory is uniquely identified by mut_info + lineage.</li>
 <li>Styling: The plot uses a clean, publication-oriented ggplot theme
 optimized for readability.</li>
 </ul>

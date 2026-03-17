@@ -14,7 +14,7 @@ tab2UI <- function(id) {
         selected = "MT-2_1"),
 
       selectInput(ns("passage"), 
-        label = "Passage:", 
+        label = "Transfer:", 
         choices = as.character(seq(10, 500, 10)),
         selected = "100"),
 

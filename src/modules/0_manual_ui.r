@@ -29,7 +29,7 @@ tab0UI <- function(id) {
                         });
                     "))
                 ),
-                includeHTML("src/misc/www/manual.html"),
+                includeHTML("www/manual.html"),
                 width = 10
             )
         )

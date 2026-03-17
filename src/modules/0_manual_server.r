@@ -1,5 +1,5 @@
 
-rmarkdown::render("src/misc/www/manual.Rmd", output_file = "manual.html")
+rmarkdown::render("www/manual.Rmd", output_file = "manual.html")
 
 
 

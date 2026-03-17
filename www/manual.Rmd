@@ -1,17 +1,19 @@
 ---
 title: "LTEEviz Manual"
-output: html_fragment
+output:
+  html_fragment:
+    css: styles.css
 ---
 
 # Introduction {#introduction}
 
 <br>
 
-Welcome to the LTEEviz application. This manual provides a complete guide to using the features of this tool for exploring temporal mutation data obtained through next generation sequencing technologies.
+Welcome to the LTEEviz application.
 
-LTEEviz is designed to access, explore, and visualize HIV-1 mutations from the Long-Term Evolution Experiment (LTEE) published in (link to DOI). 
+LTEEviz is designed to enable interested parties to visually and interactively explore the curated mutation data from the HIV-1 Long-Term Evolution Experiment (LTEE) published in [Movasati et al.](https://doi.org/10.64898/2026.02.04.700995) (2026). 
 
-The application is divided into several sections, each accessible from the navigation box at the top of the page. Below you can find a brief overview of each section:
+This manual provides a complete guide to using the features of this tool. The application is divided into several sections, reachable from the navigation bar at the top of the page. Below you can find a brief overview of each section:
 
 <br>
 <br>

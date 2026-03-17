@@ -2,7 +2,7 @@
 
 # Ignore all data files
 data/*
-
+data/igv-input/plasmid/*
 # BUT keep the directory structure
 !data/
 !data/**/

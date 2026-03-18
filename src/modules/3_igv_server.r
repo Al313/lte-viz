@@ -2,7 +2,7 @@
 
 # Set paths to input files
 genome_name <- "HIV-NL4_3"
-fasta_file <- file.path("data/igv-input/plasmid/reference.fasta")
+fasta_file <- file.path("data/igv-input/plasmid/reference_trimmed.fasta")
 annotation_file <- file.path("data/igv-input/plasmid/annotation.gff3")
 vcf_file <- file.path("data/igv-input/plasmid/filtered_variants.vcf.gz")
 line_conversion_tbl <- c("MT-2_1" = 13, "MT-2_2" = 14, "MT-4_1" = 15, "MT-4_2" = 16)
@@ -59,6 +59,7 @@ tab3Server <- function(id, options, annotation_file, module_data) {
             tbl.gff3 <- read.table(annotation_file, sep = "\t", as.is = TRUE, header = FALSE)
             colnames(tbl.gff3) <- c("seqname", "source", "feature", "start", "end",
                 "score", "strand", "frame", "attribute")
+            tbl.gff3 <- tbl.gff3[tbl.gff3$start <= 9710 & tbl.gff3$end >= 1, ]
             
             color.table <- list(
                 repeat_region = "blue",

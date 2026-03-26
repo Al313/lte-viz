@@ -1,1 +1,1 @@
-LTEviz is a shiny web application designed for visualizing temporal sequencing data of evolving microbial populations.
+LTEEviz is a shiny web application designed for visualizing temporal sequencing data of HIV-1 from a long-term evolution experiment [Movasati et al. (2026)](https://www.biorxiv.org/content/10.64898/2026.02.04.700995v2.full).

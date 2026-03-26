@@ -94,14 +94,9 @@ gg_fig <- ggplot(variants_expiii_subset, aes(x=allele_freq)) +
     plot.margin = unit(c(1,1,1,1), "cm"))
 
 
-# save figure
-date <- str_split(Sys.time(), pattern = " ")[[1]][1]
-fig_dir <- paste0(wd, "results/figs/publication/expiii/provisional/", date, "/")
-ifelse(!dir.exists(file.path(fig_dir)), dir.create(file.path(fig_dir)), FALSE)
-anim_save(gg_fig, file = paste0(fig_dir, "allele-freq-accumulation3.gif"))
 
-# save for lteeviz
-fig_dir <- "/Users/alimos313/Documents/studies/phd/hpc-research/lte-viz/src/misc/www/"
-
+# save anim for lteeviz
+fig_dir <- "/Users/alimos313/Documents/studies/phd/hpc-research/lte-viz/data/"
+anim_save(gg_fig, file = paste0(fig_dir, "freq_distribution.gif"))
 ```
 

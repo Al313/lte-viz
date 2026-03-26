@@ -96,7 +96,7 @@ tab4Server <- function(id, mutation_data) {
             req(input$freq_mode == "Frequency distribution")
             
             list(
-                src = "src/misc/www/freq_distribution.gif",  # path to your saved gif
+                src = "data/freq_distribution.gif",  # path to your saved gif
                 contentType = "image/gif",
                 width = "75%"                       # can also use a numeric pixel value
             )
